@@ -13,7 +13,7 @@ const StyledDesktop = styled.div`
 const Desktop = props => {
     return (
         <StyledDesktop>
-            <button style='margin-top:50px' onClick={ e => props.action() }>OPEN</button>
+            <button style='margin-top:50px' onClick={ e => props.action("textreader") }>OPEN</button>
         </StyledDesktop>
     );
 }

@@ -1,13 +1,19 @@
 import MenuBar from '../components/MenuBar/MenuBar';
 import Desktop from '../components/Desktop/Desktop';
 import { ThemeProvider } from 'styled-components'
-import { Component } from 'preact';
+import { Component, h } from 'preact';
 import base from '../themes/base'
 
 import Alert from '../applications/Alert/Alert';
+import TextReader from '../applications/TextReader/TextReader';
 
 import testmenu from '../data/test/testmenu'
 import testrocket from '../data/test/testrocket'
+
+const apps = {
+    alert: Alert,
+    textreader: TextReader
+}
 
 class Finder extends Component {
     constructor() {
@@ -17,13 +23,16 @@ class Finder extends Component {
         }
     }
 
-    closeApp = () => { this.setState({ applications: this.state.applications.pop("window") }); }
+    componentDidUpdate() {
+        console.log(this.state.applications)
+    }
+
+    closeApp = () => { this.setState({ applications: this.state.applications.pop() }); }
 
     openApp = (appName, fileName, options) => {
-        console.log("opening app with appname: ", appName, ", filename: ", fileName  ,"and options: ", options)
+        let app = apps[appName] ? { app: apps[appName] } : { app: Alert }
 
-        let name = appName ? appName : 'alert'
-        this.setState({ applications: [...this.state.applications, name] });
+        this.setState({ applications: [...this.state.applications, app] });
     }
 
     render() {
@@ -33,7 +42,7 @@ class Finder extends Component {
             <main>
                 <MenuBar melloMenu={ testrocket } appMenu={ testmenu } action={ this.openApp } />
                 <Desktop action={ this.openApp } />
-                { applications.map(application => <Alert close={ this.closeApp } name={ application } />) }
+                { applications.map(application => h(application.app, { action: this.closeApp }, "content")) }
             </main>
             </ThemeProvider>
         );
