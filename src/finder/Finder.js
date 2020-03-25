@@ -29,8 +29,9 @@ class Finder extends Component {
 
     closeApp = () => { this.setState({ applications: this.state.applications.pop() }); }
 
-    openApp = (appName, fileName, options) => {
+    openApp = (appName, options) => {
         let app = apps[appName] ? { app: apps[appName] } : { app: Alert }
+        app.options = apps[appName] ? options : { type: "error", content:"This app is not installed." }
 
         this.setState({ applications: [...this.state.applications, app] });
     }
@@ -42,7 +43,7 @@ class Finder extends Component {
             <main>
                 <MenuBar melloMenu={ testrocket } appMenu={ testmenu } action={ this.openApp } />
                 <Desktop action={ this.openApp } />
-                { applications.map(application => h(application.app, { action: this.closeApp }, "content")) }
+                { applications.map(application => h(application.app, { close: this.closeApp, options: application.options })) }
             </main>
             </ThemeProvider>
         );
