@@ -7,6 +7,14 @@ import TitleBar from './TitleBar/Titlebar';
 import StatusBar from './StatusBar/StatusBar';
 import { HorizontalScrollBar, VerticalScrollBar } from './ScrollBar/ScrollBar';
 
+/*
+
+    Windows are containers for application content. They can be spawned and removed from an open app, and are removed when the app is quit from the finder.
+    Windows can have an optional titlebar, statusbar and/or scrollbars.
+    They can be given an initial size, and can optionally be freely moved over the desktop or maximised.
+
+*/
+
 const StyledWindow = styled(Box).attrs(props => ({
     style: {
         top: `${props.state.maximised ? 34 : props.state.position.top}px`,
@@ -205,7 +213,7 @@ class Window extends Component {
 
         return(
             <>
-            <StyledWindow state={ state } floating vertical border-btl="special" >
+            <StyledWindow state={ state } floating vertical border >
                 { props.titleBar ? <TitleBar moveHandle={ state.maximised ? this.nope : this.startMove } id={ props.id } close={ props.close } maximise={ this.maximiseWindow } name={ props.name } /> : <></> }
                 { props.statusBar ? <StatusBar /> : <></> }
                 <InnerWindow>

@@ -2,19 +2,6 @@ import styled from 'styled-components';
 
 import Box from '../../Primitives/Box';
 
-const StyledTitleBar = styled(Box)`
-    height: 32px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-
-    cursor: grab;
-
-    :active {
-        cursor: grabbing;
-    }
-`
-
 const Title = styled.div`
     font-family: ${ props => props.theme.fonts.primary };
     font-size: 20px;
@@ -51,43 +38,37 @@ const TitleFiller = styled(Filler)`
     flex-grow: 1;
 `
 
-const Button = styled.div`
-    width: 18px;
+const Button = styled(Box)`
     min-width: 18px;
-    height: 18px;
     margin: 4px 0;
-    border: 2px solid ${ props => props.theme.colours.foreground };
-    cursor: pointer;
-`
-
-const ResizeButton = styled.div`
-    width: 8px;
-    height: 8px;
-    border-right: 2px solid ${ props => props.theme.colours.foreground };
-    border-bottom: 2px solid ${ props => props.theme.colours.foreground };
 `
 
 const TitleBar = props => {
     return(
-        <StyledTitleBar onMouseDown={ props.moveHandle } onTouchStart={ props.moveHandle } onDoubleClick={ props.maximise } >
-            <SideFiller>
-                <Line /><Line /><Line /><Line /><Line /><Line />
-            </SideFiller>
-            <Button onClick={ () => props.close(props.id) } onTouchStart={ props.close } />
-            <TitleFiller>
-                <Line /><Line /><Line /><Line /><Line /><Line />
-            </TitleFiller>
-            <Title onDoubleClick={ props.maximise }>
-                { props.name }
-            </Title>
-            <TitleFiller>
-                <Line /><Line /><Line /><Line /><Line /><Line />
-            </TitleFiller>
-            <Button onClick={ props.maximise } onTouchStart={ props.maximise }><ResizeButton /></Button>
-            <SideFiller>
-                <Line /><Line /><Line /><Line /><Line /><Line />
-            </SideFiller>
-        </StyledTitleBar>
+        <Box
+            onMouseDown={ props.moveHandle }
+            onTouchStart={ props.moveHandle }
+            onDoubleClick={ props.maximise }
+            handle border-b="special" height="32px"
+        >
+        <SideFiller><Line /><Line /><Line /><Line /><Line /><Line /></SideFiller>
+        <Button
+            onClick={ () => props.close(props.id) }
+            onTouchStart={ props.close }
+            border width="18px" height="18px"
+        />
+        <TitleFiller><Line /><Line /><Line /><Line /><Line /><Line /></TitleFiller>
+        <Title onDoubleClick={ props.maximise }>
+            { props.name }
+        </Title>
+        <TitleFiller><Line /><Line /><Line /><Line /><Line /><Line /></TitleFiller>
+        <Button
+            onClick={ props.maximise }
+            onTouchStart={ props.maximise }
+            border width="18px" height="18px"
+        ><Box border-rb width="8px" height="8px" /></Button>
+        <SideFiller><Line /><Line /><Line /><Line /><Line /><Line /></SideFiller>
+        </Box>
     )
 }
 

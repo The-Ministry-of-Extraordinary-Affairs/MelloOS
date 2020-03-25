@@ -21,8 +21,8 @@ import styled, { css } from 'styled-components'
 function returnBorder(props, pattern) {
     // check if there's a specific match for our current border property
     let match = Object.keys(props).filter(key => pattern.test(key))[0]
-    if (typeof match === "string") return props[match]
-    if (match) return "default"
+    if (typeof props[match] === "string") return props[match]
+    if (props[match]) return "default"
 
     // check if there's a match for the generic border
     if (typeof props.border === "string") return props.border
@@ -35,9 +35,17 @@ function returnBorder(props, pattern) {
 export const Box = styled.div`
     display: flex;
     flex-direction: ${props => props.vertical ? "column" : "row"};
+    flex-grow: ${ props => props.grow ? 1 : 0 };
 
     margin: 0;
     min-width: 0;
+    min-height: 0;
+
+    width: ${ props => props.width ? props.width : "auto" };
+    height: ${ props => props.width ? props.height : "auto" };
+
+    cursor: ${ props => props.handle ? "grab" : props.button ? "pointer" : "auto" };
+    :active { cursor: ${ props => props.handle ? "grabbing" : props.button ? "pointer" : "auto" }; }
 
     color: ${ props => props.theme.colours.foreground };
     background-color: ${ props => props.theme.colours.background };
