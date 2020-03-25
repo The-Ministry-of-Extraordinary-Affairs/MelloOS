@@ -31,6 +31,8 @@ const InnerWindow = styled.div`
 
 const WindowContent = styled.div`
     flex-grow: 1;
+    display: flex;
+    vertical-align: middle;
 `
 
 const ResizeWindow = styled.div.attrs(props => ({
@@ -210,7 +212,7 @@ class Window extends Component {
         return(
             <>
             <StyledWindow state={ state } >
-                { props.titleBar ? <TitleBar moveHandle={ state.maximised ? this.nope : this.startMove } close={ props.close } maximise={ this.maximiseWindow } name={ props.name } /> : <></> }
+                { props.titleBar ? <TitleBar moveHandle={ state.maximised ? this.nope : this.startMove } id={ props.id } close={ props.close } maximise={ this.maximiseWindow } name={ props.name } /> : <></> }
                 { props.statusBar ? <StatusBar /> : <></> }
                 <InnerWindow>
                 <WindowContent> { props.children } </WindowContent>

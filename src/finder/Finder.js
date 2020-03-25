@@ -27,11 +27,16 @@ class Finder extends Component {
         console.log(this.state.applications)
     }
 
-    closeApp = () => { this.setState({ applications: this.state.applications.pop() }); }
+    closeApp = (id) => {
+        let appList = this.state.applications.filter(app => app.id !== id);
+        this.setState({ applications: appList });
+    }
 
     openApp = (appName, options) => {
         let app = apps[appName] ? { app: apps[appName] } : { app: Alert }
         app.options = apps[appName] ? options : { type: "error", content:"This app is not installed." }
+
+        app.id = Math.random().toString(16).substr(2,8)
 
         this.setState({ applications: [...this.state.applications, app] });
     }
@@ -43,7 +48,7 @@ class Finder extends Component {
             <main>
                 <MenuBar melloMenu={ testrocket } appMenu={ testmenu } action={ this.openApp } />
                 <Desktop action={ this.openApp } />
-                { applications.map(application => h(application.app, { close: this.closeApp, options: application.options })) }
+                { applications.map(application => h(application.app, { id: application.id, close: this.closeApp, options: application.options })) }
             </main>
             </ThemeProvider>
         );

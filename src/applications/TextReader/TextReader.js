@@ -5,7 +5,7 @@ class TextReader extends Component {
     nope = () => { return}
 
     render(props) {
-        return ( <Window scrollBars titleBar statusBar> This is a text </Window> )
+        return ( <Window scrollBars titleBar statusBar close={ props.close } id={ props.id }> Window with id: { props.id } </Window> )
     }
 }
 

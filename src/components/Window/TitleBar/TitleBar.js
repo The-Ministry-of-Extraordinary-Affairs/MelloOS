@@ -70,7 +70,7 @@ const TitleBar = props => {
             <SideFiller>
                 <Line /><Line /><Line /><Line /><Line /><Line />
             </SideFiller>
-            <Button onClick={ props.close } onTouchStart={ props.close } />
+            <Button onClick={ () => props.close(props.id) } onTouchStart={ props.close } />
             <TitleFiller>
                 <Line /><Line /><Line /><Line /><Line /><Line />
             </TitleFiller>
