@@ -17,19 +17,11 @@ class Finder extends Component {
         }
     }
 
-    closeWindow = () => {
-        console.log('bye')
-        let w = this.state.windows
-        w.pop('window')
-        this.setState({ windows: w });
-    }
+    closeWindow = () => { this.setState((state) => { windows: this.state.windows.pop("window") }); }
 
     openWindow = (name) => {
         let windowName = name ? name : 'untitled window'
-        let w = this.state.windows
-        w.push(windowName)
-        console.log(w)
-        this.setState({ windows: w });
+        this.setState((state) => { windows: [...this.state.windows, windowName] });
     }
 
     openApp = (appName, fileName, options) => {
