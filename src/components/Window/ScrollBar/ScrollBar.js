@@ -1,107 +1,44 @@
 import styled from 'styled-components';
+import Box from '../../Primitives/Box';
 
-const StyledHorizontalScrollBar = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 30px;
-    align-self: flex-end;
-    `
-
-const StyledVerticalScrollBar = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 30px;
-    height: auto;
-    `
-
-const LeftArrow = styled.div`
-    width: 30px;
-    height: 30px;
-    border-top: 2px solid ${ props => props.theme.colours.foreground };
-    `
-
-const RightArrow = styled.div`
-    width: 30px;
-    height: 30px;
-    border-top: 2px solid ${ props => props.theme.colours.foreground };
-    `
-
-const UpArrow = styled.div`
-    width: 30px;
-    height: 30px;
-    border-left: 2px solid ${ props => props.theme.colours.foreground };
-    `
-
-const DownArrow = styled.div`
-    width: 30px;
-    height: 30px;
-    border-left: 2px solid ${ props => props.theme.colours.foreground };
-    `
-
-const ResizeBox = styled.div`
-    width: 28px;
-    height: 30px;
+const ResizeBox = styled(Box)`
     position: relative;
-    border-top: 2px solid ${ props => props.theme.colours.foreground };
-    border-left: 2px solid ${ props => props.theme.colours.foreground };
-    cursor: move;
-    `
+`
 
-const ResizeBigIcon = styled.div`
-    width: 14px;
-    height: 14px;
+const ResizeBigIcon = styled(Box)`
     position: absolute;
     left: 8px;
     top: 8px;
-    background-color: ${ props => props.theme.colours.background };
-    border: 2px solid ${ props => props.theme.colours.foreground };
 `
 
-const ResizeSmallIcon = styled.div`
-    width: 10px;
-    height: 10px;
+const ResizeSmallIcon = styled(Box)`
     position: absolute;
     left: 4px;
     top: 4px;
-    background-color: ${ props => props.theme.colours.background };
-    border: 2px solid ${ props => props.theme.colours.foreground };
 `
-
-const HorizontalBar = styled.div`
-    flex-grow: 1;
-    height: 100%;
-    border-top: 2px solid ${ props => props.theme.colours.foreground };
-    border-left: 2px solid ${ props => props.theme.colours.foreground };
-    border-right: 2px solid ${ props => props.theme.colours.foreground };
-`
-
-const VerticalBar = styled.div`
-    flex-grow: 2;
-    width: 100%;
-    border-top: 2px solid ${ props => props.theme.colours.foreground };
-    border-left: 2px solid ${ props => props.theme.colours.foreground };
-    border-bottom: 2px solid ${ props => props.theme.colours.foreground };
-`
-
 
 export const HorizontalScrollBar = props => {
     return(
-        <StyledHorizontalScrollBar>
-            <LeftArrow />
-            <HorizontalBar />
-            <RightArrow />
-            <ResizeBox onMouseDown={ props.resizeHandle } onTouchStart={ props.resizeHandle }><ResizeBigIcon /><ResizeSmallIcon /></ResizeBox>
-        </StyledHorizontalScrollBar>
+        <Box height="30px">
+            <Box width="30px" height="30px" border-t />
+            <Box border-trl grow />
+            <Box width="30px" height="30px" border-t />
+            <ResizeBox
+                onMouseDown={ props.resizeHandle }
+                onTouchStart={ props.resizeHandle }
+                width="28px" height="30px"
+                border-tl button
+            ><ResizeBigIcon border width="14px" height="14px" /><ResizeSmallIcon border width="10px" height="10px" /></ResizeBox>
+        </Box>
     )
 }
 
 export const VerticalScrollBar = props => {
     return(
-        <StyledVerticalScrollBar>
-            <UpArrow />
-            <VerticalBar />
-            <DownArrow />
-        </StyledVerticalScrollBar>
+        <Box vertical width="30px">
+            <Box width="28px" height="30px" border-l />
+            <Box border-tlb grow width="28px" />
+            <Box width="28px" height="30px" border-l />
+        </Box>
     )
 }

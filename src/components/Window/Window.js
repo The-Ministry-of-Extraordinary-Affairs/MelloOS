@@ -15,7 +15,7 @@ import { HorizontalScrollBar, VerticalScrollBar } from './ScrollBar/ScrollBar';
 
 */
 
-const StyledWindow = styled(Box).attrs(props => ({
+const OuterWindow = styled(Box).attrs(props => ({
     style: {
         top: `${props.state.maximised ? 34 : props.state.position.top}px`,
         left: `${props.state.maximised ? 0 : props.state.position.left}px`,
@@ -25,17 +25,9 @@ const StyledWindow = styled(Box).attrs(props => ({
     height: ${ props => props.state.maximised ? window.innerHeight - 34 : props.state.size.height }px;
 `
 
-const InnerWindow = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-`
+const InnerWindow = styled(Box)``
 
-const WindowContent = styled.div`
-    flex-grow: 1;
-    display: flex;
-    vertical-align: middle;
-`
+const WindowContent = styled(Box)``
 
 const ResizeWindow = styled.div.attrs(props => ({
     style: {
@@ -47,7 +39,7 @@ const ResizeWindow = styled.div.attrs(props => ({
 }))`
     position: absolute;
     background-color: transparent;
-    border: 2px dotted ${ props => props.theme.colours.border };
+    border: ${ props => props.theme.borders.light };
     pointer-events: none;
 `
 
@@ -61,7 +53,7 @@ const InnerResizeWindow = styled.div.attrs(props => ({
 }))`
     position: absolute;
     background-color: transparent;
-    border: 2px dotted ${ props => props.theme.colours.border };
+    border: ${ props => props.theme.borders.light };
     pointer-events: none;
 `
 
@@ -75,9 +67,10 @@ const ResizeHandle = styled.div.attrs(props => ({
 }))`
     position: absolute;
     background-color: transparent;
-    border-left: 2px dotted ${ props => props.theme.colours.border };
-    border-top: 2px dotted ${ props => props.theme.colours.border };
+    border-left: ${ props => props.theme.borders.light };
+    border-top: ${ props => props.theme.borders.light };
     pointer-events: none;
+
 `
 
 class Window extends Component {
@@ -213,16 +206,21 @@ class Window extends Component {
 
         return(
             <>
-            <StyledWindow state={ state } floating vertical border >
+            <OuterWindow state={ state } floating vertical border >
                 { props.titleBar ? <TitleBar moveHandle={ state.maximised ? this.nope : this.startMove } id={ props.id } close={ props.close } maximise={ this.maximiseWindow } name={ props.name } /> : <></> }
                 { props.statusBar ? <StatusBar /> : <></> }
-                <InnerWindow>
-                <WindowContent> { props.children } </WindowContent>
+                <InnerWindow grow>
+                    <WindowContent grow> { props.children } </WindowContent>
                     { props.scrollBars ? <VerticalScrollBar /> : <></> }
                 </InnerWindow>
                 { props.scrollBars ? <HorizontalScrollBar resizeHandle={ state.maximised ? this.nope : this.startResize } /> : <></> }
-            </StyledWindow>
-            { state.resizing ? <><ResizeWindow state={ state } /> <InnerResizeWindow state={ state } /> <ResizeHandle state={ state } /></> : <></> }
+            </OuterWindow>
+            { state.resizing ?
+                <>
+                <ResizeWindow state={ state } />
+                <InnerResizeWindow state={ state } />
+                <ResizeHandle state={ state } />
+                </> : <></> }
             </>
         )
     }
