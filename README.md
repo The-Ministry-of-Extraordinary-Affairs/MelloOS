@@ -8,7 +8,7 @@
 Themable Preact + Styled-Components web components with the classic Macintosch® feel.
 
 `indication of current state:`
-![screenshot](/src/screenshots/20200325.png)
+![screenshot](/screenshots/20200325.png)
 
 ---
 
