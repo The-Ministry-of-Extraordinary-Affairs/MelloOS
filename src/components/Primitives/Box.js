@@ -11,20 +11,23 @@ import styled, { css } from 'styled-components'
     - border: "style"           sets all borders to theme.borders["style"], border: true sets all borders to theme.borders.default
 
         You can choose to set a single border using [t, r, b, l] like so:
-        border.t: "style"       sets only top border to theme.borders["style"], and the rest to clear (true sets the border to default)
+        border-t: "style"       sets only top border to theme.borders["style"], and the rest to clear (true sets the border to default)
 
         Or combine any of those as follows:
-        border.trbl: "style"    sets top, right, bottom, left border to "style", and the rest to clear (true sets the border to default)
+        border-trbl: "style"    sets top, right, bottom, left border to "style", and the rest to clear (true sets the border to default)
 
 */
 
-function returnBorder(border, pattern) {
-    if(!border) return "none"
-    if(border == true) return "default"
-    if(typeof(border) === "string") return border
-    let matchingKeys = Object.keys(border).filter(key => pattern.test(key));
-    if(border[matchingKeys[0]] == true) return "default"
-    if(border[matchingKeys[0]]) return border[matchingKeys[0]]
+function returnBorder(props, pattern) {
+    // check if there's a specific match for our current border property
+    let match = Object.keys(props).filter(key => pattern.test(key))[0]
+    if (typeof match === "string") return props[match]
+    if (match) return "default"
+
+    // check if there's a match for the generic border
+    if (typeof props.border === "string") return props.border
+    if (props.border) return "default"
+    // return "none"
     return "none";
 }
 
@@ -39,10 +42,10 @@ export const Box = styled.div`
     color: ${ props => props.theme.colours.foreground };
     background-color: ${ props => props.theme.colours.background };
 
-    border-top: ${ props => props.theme.borders[returnBorder(props.border, /t/)]};
-    border-left: ${ props => props.theme.borders[returnBorder(props.border, /l/)]};
-    border-bottom: ${ props => props.theme.borders[returnBorder(props.border, /b/)]};
-    border-right: ${ props => props.theme.borders[returnBorder(props.border, /r/)]};
+    border-top: ${ props => props.theme.borders[returnBorder(props, /border-[a-z]*t[a-z]*/)]};
+    border-left: ${ props => props.theme.borders[returnBorder(props, /border-[a-z]*l[a-z]*/)]};
+    border-bottom: ${ props => props.theme.borders[returnBorder(props, /border-[a-z]*b[a-z]*/)]};
+    border-right: ${ props => props.theme.borders[returnBorder(props, /border-[a-z]*r[a-z]*/)]};
 
     box-shadow: ${ props => props.theme.shadows.default };
     ${props => props.floating && css`

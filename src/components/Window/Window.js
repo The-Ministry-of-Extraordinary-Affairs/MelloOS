@@ -205,7 +205,7 @@ class Window extends Component {
 
         return(
             <>
-            <StyledWindow state={ state } floating vertical border >
+            <StyledWindow state={ state } floating vertical border-btl="special" >
                 { props.titleBar ? <TitleBar moveHandle={ state.maximised ? this.nope : this.startMove } id={ props.id } close={ props.close } maximise={ this.maximiseWindow } name={ props.name } /> : <></> }
                 { props.statusBar ? <StatusBar /> : <></> }
                 <InnerWindow>
