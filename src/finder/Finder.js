@@ -21,7 +21,7 @@ class Finder extends Component {
 
     openWindow = (name) => {
         let windowName = name ? name : 'untitled window'
-        this.setState((state) => { windows: [...this.state.windows, windowName] });
+        this.setState({ windows: [...this.state.windows, windowName] });
     }
 
     openApp = (appName, fileName, options) => {
@@ -36,7 +36,7 @@ class Finder extends Component {
             <main>
                 <MenuBar melloMenu={ testrocket } appMenu={ testmenu } action={ this.openApp } />
                 <Desktop action={ this.openApp } />
-                { windows.map(window => <Window close={ this.closeWindow } name={ window } />) }
+                { windows.map(window => <Window close={ this.closeWindow } name={ window } titleBar statusBar scrollBars />) }
             </main>
             </ThemeProvider>
         );

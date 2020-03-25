@@ -37,8 +37,8 @@ const ResizeWindow = styled.div.attrs(props => ({
     style: {
         top: `${props.state.position.top}px`,
         left: `${props.state.position.left}px`,
-        width: `${props.state.pointer.x}px`,
-        height: `${props.state.pointer.y}px`
+        width: `${props.state.pointer.x - props.state.position.left }px`,
+        height: `${props.state.pointer.y - props.state.position.top }px`
     }
 }))`
     position: absolute;
@@ -51,8 +51,8 @@ const InnerResizeWindow = styled.div.attrs(props => ({
     style: {
         top: `${props.state.position.top + 34}px`,
         left: `${props.state.position.left}px`,
-        width: `${props.state.pointer.x - 30}px`,
-        height: `${props.state.pointer.y - 64}px`
+        width: `${props.state.pointer.x - props.state.position.left - 30}px`,
+        height: `${props.state.pointer.y - props.state.position.top - 64}px`
     }
 }))`
     position: absolute;
@@ -60,10 +60,11 @@ const InnerResizeWindow = styled.div.attrs(props => ({
     border: 2px dotted ${ props => props.theme.colours.border };
     pointer-events: none;
 `
-const ResizeBox = styled.div.attrs(props => ({
+
+const ResizeHandle = styled.div.attrs(props => ({
     style: {
-        top: `${props.state.pointer.y + props.state.position.top - 28}px`,
-        left: `${props.state.pointer.x + props.state.position.left - 28}px`,
+        top: `${props.state.pointer.y - 28}px`,
+        left: `${props.state.pointer.x - 28}px`,
         width: `28px`,
         height: `28px`
     }
@@ -76,8 +77,9 @@ const ResizeBox = styled.div.attrs(props => ({
 `
 
 class Window extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        console.log(props);
         this.state = {
             resizing: false,
             size: {
@@ -161,8 +163,8 @@ class Window extends Component {
         if (!this.state.resizing) return
         this.setState({
             pointer: {
-                x: e.pageX - this.state.position.left,
-                y: e.pageY - this.state.position.top
+                x: e.pageX,
+                y: e.pageY
             }
         })
         e.stopPropagation()
@@ -170,7 +172,6 @@ class Window extends Component {
     }
 
     startResize = (e) => {
-        console.log('hi')
         this.setState({
             resizing: true,
             offset: {
@@ -178,8 +179,8 @@ class Window extends Component {
                 top: e.pageY
             },
             pointer: {
-                x: this.state.size.width,
-                y: this.state.size.height
+                x: e.pageX,
+                y: e.pageY
             }
         })
         e.stopPropagation()
@@ -193,37 +194,31 @@ class Window extends Component {
                 height: this.state.size.height + e.pageY - this.state.offset.top
             }
         })
-        console.log(this.state.size)
         this.setState({ resizing: false })
         e.stopPropagation()
         e.preventDefault()
     }
 
-    maximiseWindow = () => {
-        console.log(this)
-        this.setState({ maximised: !this.state.maximised })
-    }
+    maximiseWindow = () => { this.setState({ maximised: !this.state.maximised }) }
 
-    nope = () => {
-        console.log('no moving/resizing while maximised!')
-        return
-    }
+    nope = () => { return }
 
     render(props) {
         let state = this.state
+        console.log(props)
 
         return(
             <>
             <StyledWindow state={ state } >
-                <TitleBar moveHandle={ state.maximised ? this.nope : this.startMove } close={ props.close } maximise={ this.maximiseWindow } name={ props.name } />
-                <StatusBar />
+                { props.titleBar ? <TitleBar moveHandle={ state.maximised ? this.nope : this.startMove } close={ props.close } maximise={ this.maximiseWindow } name={ props.name } /> : <></> }
+                { props.statusBar ? <StatusBar /> : <></> }
                 <InnerWindow>
                     <WindowContent>kip</WindowContent>
-                    <VerticalScrollBar />
+                    { props.scrollBars ? <VerticalScrollBar /> : <></> }
                 </InnerWindow>
-                    <HorizontalScrollBar resizeHandle={ state.maximised ? this.nope : this.startResize } />
+                { props.scrollBars ? <HorizontalScrollBar resizeHandle={ state.maximised ? this.nope : this.startResize } /> : <></> }
             </StyledWindow>
-            { state.resizing ? <><ResizeWindow state={ state } /> <InnerResizeWindow state={ state } /> <ResizeBox state={ state } /></> : <></> }
+            { state.resizing ? <><ResizeWindow state={ state } /> <InnerResizeWindow state={ state } /> <ResizeHandle state={ state } /></> : <></> }
             </>
         )
     }
