@@ -4,7 +4,7 @@ import { Component } from 'preact';
 const StyledDropDownItem = styled.li`
     display: block;
 
-    font-family: ${ props => props.theme.fonts.uiPrimary };
+    font-family: ${ props => props.theme.fonts.primary };
     font-size: 16px;
     line-height: 2;
     padding-left: 16px;

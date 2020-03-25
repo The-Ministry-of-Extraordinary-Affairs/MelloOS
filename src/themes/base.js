@@ -8,8 +8,8 @@ const base = {
         desktop: "azure"
     },
     fonts: {
-        uiPrimary: "Chicago",
-        uiSecondary: "Helvetica",
+        primary: "Chicago",
+        secondary: "Helvetica",
     },
     fontSizes: [8, 12, 16, 20]
 }

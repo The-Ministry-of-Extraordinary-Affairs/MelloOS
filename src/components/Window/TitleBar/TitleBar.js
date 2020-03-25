@@ -13,7 +13,7 @@ const StyledTitleBar = styled.div`
 `
 
 const Title = styled.div`
-    font-family: ${ props => props.theme.fonts.uiPrimary };
+    font-family: ${ props => props.theme.fonts.primary };
     font-size: 20px;
     line-height: 1.6;
     text-align: center;

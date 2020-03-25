@@ -6,7 +6,7 @@ const StyledMenuItem = styled.li`
     display: inline-flex;
     flex-direction: column;
 
-    font-family: ${ props => props.theme.fonts.uiPrimary };
+    font-family: ${ props => props.theme.fonts.primary };
     font-size: 16px;
     line-height: 2;
     padding-left: 8px;
