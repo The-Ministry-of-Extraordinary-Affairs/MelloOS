@@ -1,5 +1,16 @@
 # MelloOS
 
+> 🚨 **DANGER** Horribly WIP. 🚧
+> Not suitable for use.
+
+🆕 Mac OS System 7 for your website!
+
+Themable Preact + Styled-Components web components with the classic Macintosch® feel.
+
+---
+
+Build using Preact-CLI:
+
 ## CLI Commands
 
 ``` bash
@@ -15,7 +26,7 @@ npm run build
 # test the production build locally
 npm run serve
 
-# run tests with jest and preact-render-spy 
+# run tests with jest and preact-render-spy
 npm run test
 ```
 
