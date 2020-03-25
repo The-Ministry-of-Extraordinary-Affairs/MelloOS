@@ -1,0 +1,29 @@
+@font-face {
+	font-family: 'Chicago';
+    src: url('./fonts/ChicagoFLF.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body, main {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    font-family: "Geneva", "Verdana", "Tahoma", sans-serif;
+}
+
+/* Disable native scrollbars:  */
+::-webkit-scrollbar {                   /* Safari, Chrome */
+    display: none;
+    width: 0;
+}
+* { /* <-- FF does not inherit, so needs explicit disabling on all dom nodes */
+    scrollbar-width: none;   /* FF */
+    overflow: -moz-scrollbars-none;     /* FF */
+    -ms-overflow-style: none;           /* IE, Edge */
+}
