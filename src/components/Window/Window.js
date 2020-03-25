@@ -1,26 +1,20 @@
 import styled from 'styled-components';
 import { Component } from 'preact';
+
+import Box from '../Primitives/Box';
+
 import TitleBar from './TitleBar/Titlebar';
 import StatusBar from './StatusBar/StatusBar';
 import { HorizontalScrollBar, VerticalScrollBar } from './ScrollBar/ScrollBar';
 
-const StyledWindow = styled.div.attrs(props => ({
+const StyledWindow = styled(Box).attrs(props => ({
     style: {
         top: `${props.state.maximised ? 34 : props.state.position.top}px`,
         left: `${props.state.maximised ? 0 : props.state.position.left}px`,
     }
 }))`
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-
     width: ${ props => props.state.maximised ? window.innerWidth : props.state.size.width }px;
     height: ${ props => props.state.maximised ? window.innerHeight - 34 : props.state.size.height }px;
-    border: 2px solid ${ props => props.theme.colours.foreground };
-
-    background-color: ${ props => props.theme.colours.background };
-
-    box-shadow: 1px 1px 0px 0px black;
 `
 
 const InnerWindow = styled.div`
@@ -211,7 +205,7 @@ class Window extends Component {
 
         return(
             <>
-            <StyledWindow state={ state } >
+            <StyledWindow state={ state } floating vertical border >
                 { props.titleBar ? <TitleBar moveHandle={ state.maximised ? this.nope : this.startMove } id={ props.id } close={ props.close } maximise={ this.maximiseWindow } name={ props.name } /> : <></> }
                 { props.statusBar ? <StatusBar /> : <></> }
                 <InnerWindow>

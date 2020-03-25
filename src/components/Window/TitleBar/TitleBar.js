@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
-const StyledTitleBar = styled.div`
+import Box from '../../Primitives/Box';
+
+const StyledTitleBar = styled(Box)`
     height: 32px;
-    border-bottom: 2px solid ${ props => props.theme.colours.foreground };
-    display: flex;
-    flex-direction: row;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
     cursor: grab;
 
     :active {
