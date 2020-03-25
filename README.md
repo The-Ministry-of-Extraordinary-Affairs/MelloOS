@@ -1,4 +1,4 @@
-# MelloOS
+# NautilOS
 
 > 🚨 **DANGER** Horribly WIP. 🚧
 > Not suitable for use.
