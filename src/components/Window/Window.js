@@ -213,7 +213,7 @@ class Window extends Component {
                 { props.titleBar ? <TitleBar moveHandle={ state.maximised ? this.nope : this.startMove } close={ props.close } maximise={ this.maximiseWindow } name={ props.name } /> : <></> }
                 { props.statusBar ? <StatusBar /> : <></> }
                 <InnerWindow>
-                    <WindowContent>kip</WindowContent>
+                <WindowContent> { props.children } </WindowContent>
                     { props.scrollBars ? <VerticalScrollBar /> : <></> }
                 </InnerWindow>
                 { props.scrollBars ? <HorizontalScrollBar resizeHandle={ state.maximised ? this.nope : this.startResize } /> : <></> }
