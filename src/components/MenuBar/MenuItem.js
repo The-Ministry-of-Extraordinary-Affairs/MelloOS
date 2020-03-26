@@ -1,3 +1,4 @@
+import { Component } from 'preact';
 import styled from 'styled-components';
 import { Box, flexBuilder, fontBuilder, interactionBuilder } from '../helpers';
 
@@ -17,16 +18,39 @@ const StyledMenuItem = styled(Box)`
     ${interactionBuilder(false)}
 `
 
-const MenuItem = ({
-    item,
-    children,
-    ...props
-}) => {
-    return(
-        <StyledMenuItem {...props}>
-            { item.icon ? item.icon : item.name ? item.name : item }
-        </StyledMenuItem>
-    )
+class MenuItem extends Component {
+    constructor(){
+        super();
+        this.state = {
+            open: false
+        }
+    }
+
+    open = () => {
+        this.setState({open:true})
+        window.addEventListener('mouseup', this.close)
+    }
+
+    close = () => {
+        this.setState({open:false})
+        window.removeEventListener('mouseup', this.close)
+    }
+
+    render({
+        item,
+        children,
+        ...props
+    }) {
+        return(
+            <StyledMenuItem
+                onMouseDown={this.open}
+                onTouchStart={this.open}
+                {...props}
+            >
+                { item.icon ? item.icon : item.name ? item.name : item }
+            </StyledMenuItem>
+        )
+    }
 }
 
 export default MenuItem
