@@ -21,7 +21,6 @@ const DropDown = ({
     children,
     ...props
 }) => {
-    console.log(actionHandler)
     return(
         <StyledDropDown {...props}>
             { items.map(item => <DropDownItem item={item} actionHandler={actionHandler} {...props} />) }

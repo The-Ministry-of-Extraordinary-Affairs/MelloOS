@@ -47,7 +47,6 @@ class MenuItem extends Component {
         children,
         ...props
     }) {
-        console.log(actionHandler)
         return(
             <StyledMenuItem
                 onMouseDown={this.open}

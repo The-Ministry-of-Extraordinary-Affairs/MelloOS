@@ -22,7 +22,6 @@ class DropDownItem extends Component {
         children,
         ...props
     }) {
-        console.log(actionHandler)
         return(
             <StyledDropDownItem
                 onMouseUp={ this.actionHandler }

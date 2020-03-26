@@ -21,7 +21,6 @@ const MenuBar = ({
     actionHandler,
     ...props
 }) => {
-    console.log(actionHandler)
     return(
         <StyledMenuBar {...props} >
             <Menu menu={osMenu} actionHandler={actionHandler} {...props} />
