@@ -1,3 +1,4 @@
+import { toChildArray } from 'preact';
 import styled from 'styled-components';
 import { Box, flexBuilder } from '../helpers';
 
@@ -20,7 +21,8 @@ const Menu = ({
 }) => {
     return(
         <StyledMenu {...props}>
-            { menu.items.map(item => <MenuItem item={item} />) }
+            { menu && menu.items && menu.items.map(item => <MenuItem item={item} />) }
+            { children && toChildArray(children).map(child => <MenuItem item={child} />) }
         </StyledMenu>
     )
 }

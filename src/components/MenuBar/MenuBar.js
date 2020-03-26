@@ -24,7 +24,7 @@ const MenuBar = ({
         <StyledMenuBar {...props} >
             <Menu menu={osMenu} />
             <Menu menu={appMenu} />
-            <Menu menu={ {items:[{name:"hello"}]}} right />
+            <Menu right>13:37</Menu>
         </StyledMenuBar>
     )
 }
