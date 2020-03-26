@@ -43,9 +43,11 @@ class MenuItem extends Component {
 
     render({
         item,
+        actionHandler,
         children,
         ...props
     }) {
+        console.log(actionHandler)
         return(
             <StyledMenuItem
                 onMouseDown={this.open}
@@ -53,7 +55,7 @@ class MenuItem extends Component {
                 {...props}
             >
                 { item.icon ? item.icon : item.name ? item.name : item }
-                { item.items && this.state.open && <DropDown items={ item.items } /> }
+                { item.items && this.state.open && <DropDown items={ item.items } {...props} actionHandler={actionHandler} /> }
             </StyledMenuItem>
         )
     }

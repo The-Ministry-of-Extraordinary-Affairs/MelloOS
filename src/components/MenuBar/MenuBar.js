@@ -18,13 +18,15 @@ const StyledMenuBar = styled(Box)`
 const MenuBar = ({
     osMenu,
     appMenu,
+    actionHandler,
     ...props
 }) => {
+    console.log(actionHandler)
     return(
         <StyledMenuBar {...props} >
-            <Menu menu={osMenu} />
-            <Menu menu={appMenu} />
-            <Menu right>13:37</Menu>
+            <Menu menu={osMenu} actionHandler={actionHandler} {...props} />
+            <Menu menu={appMenu} actionHandler={actionHandler} {...props} />
+            <Menu right {...props}>13:37</Menu>
         </StyledMenuBar>
     )
 }

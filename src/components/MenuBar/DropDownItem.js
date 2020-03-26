@@ -1,3 +1,4 @@
+import { Component } from 'preact';
 import styled from 'styled-components';
 import { Box, interactionBuilder } from '../helpers';
 
@@ -10,16 +11,27 @@ const StyledDropDownItem = styled(Box)`
     ${interactionBuilder()}
 `
 
-const DropDownItem = ({
-    item,
-    children,
-    ...props
-}) => {
-    return(
-        <StyledDropDownItem {...props}>
-            { item.name }
-        </StyledDropDownItem>
-    )
+class DropDownItem extends Component {
+    constructor(props) {
+        super();
+        this.actionHandler = props.actionHandler;
+    }
+    render({
+        item,
+        actionHandler,
+        children,
+        ...props
+    }) {
+        console.log(actionHandler)
+        return(
+            <StyledDropDownItem
+                onMouseUp={ this.actionHandler }
+                {...props}
+            >
+                { item.name }
+            </StyledDropDownItem>
+        )
+    }
 }
 
 export default DropDownItem

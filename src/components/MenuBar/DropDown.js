@@ -17,12 +17,14 @@ const StyledDropDown = styled(Box)`
 
 const DropDown = ({
     items,
+    actionHandler,
     children,
     ...props
 }) => {
+    console.log(actionHandler)
     return(
         <StyledDropDown {...props}>
-            { items.map(item => <DropDownItem item={item} />) }
+            { items.map(item => <DropDownItem item={item} actionHandler={actionHandler} {...props} />) }
         </StyledDropDown>
     )
 }

@@ -22,6 +22,10 @@ class Finder extends Component {
         this.PID = 0
     }
 
+    openApp(app) {
+        alert("opening ", app)
+    }
+
     render(){
         const {
             theme,
@@ -34,6 +38,7 @@ class Finder extends Component {
                     <MenuBar
                         appMenu={finderMenu}
                         osMenu={osMenu}
+                        actionHandler={this.openApp}
                     />
                     We're back!
                 </main>

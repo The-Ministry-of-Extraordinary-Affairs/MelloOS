@@ -16,13 +16,14 @@ const StyledMenu = styled(Box)`
 
 const Menu = ({
     menu,
+    actionHandler,
     children,
     ...props
 }) => {
     return(
         <StyledMenu {...props}>
-            { menu && menu.items && menu.items.map(item => <MenuItem item={item} />) }
-            { children && toChildArray(children).map(child => <MenuItem item={child} />) }
+            { menu && menu.items && menu.items.map(item => <MenuItem item={item} actionHandler={actionHandler} />) }
+            { children && toChildArray(children).map(child => <MenuItem item={child} actionHandler={actionHandler} />) }
         </StyledMenu>
     )
 }
