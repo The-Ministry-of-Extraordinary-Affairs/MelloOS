@@ -2,6 +2,7 @@ import { Component, h } from 'preact';
 import { ThemeProvider } from 'styled-components';
 
 import MenuBar from '../components/MenuBar/MenuBar'
+import Window from '../components/Window/Window';
 
 /*
 
@@ -12,7 +13,7 @@ import MenuBar from '../components/MenuBar/MenuBar'
 
 class Finder extends Component {
     constructor(props){
-        super();
+        super(props);
         this.state = {
             theme: props.theme,
             finderMenu: props.finderMenu,
@@ -40,7 +41,7 @@ class Finder extends Component {
                         osMenu={osMenu}
                         actionHandler={this.openApp}
                     />
-                    We're back!
+                    <Window />
                 </main>
             </ThemeProvider>
         )
