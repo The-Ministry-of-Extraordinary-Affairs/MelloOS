@@ -2,6 +2,8 @@ import { Component } from 'preact';
 import styled from 'styled-components';
 import { Box, flexBuilder, fontBuilder, interactionBuilder } from '../helpers';
 
+import DropDown from './DropDown'
+
 /*
     Menu Items live inside a Menu in the Menu Bar.
     If they are given an icon, it will display it. Otherwise, it will display a name.
@@ -10,10 +12,13 @@ import { Box, flexBuilder, fontBuilder, interactionBuilder } from '../helpers';
 */
 
 const StyledMenuItem = styled(Box)`
-    height: 100%;
+    /* height: 100%; */
     padding: 0 8px 0 8px;
-    align-items: center;
-    ${flexBuilder()}
+    line-height: 2;
+    max-width: 100%;
+    display: inline-flex;
+    cursor: pointer;
+    ${flexBuilder("column")}
     ${fontBuilder("primary", 4)}
     ${interactionBuilder(false)}
 `
@@ -48,6 +53,7 @@ class MenuItem extends Component {
                 {...props}
             >
                 { item.icon ? item.icon : item.name ? item.name : item }
+                { item.items && this.state.open && <DropDown items={ item.items } /> }
             </StyledMenuItem>
         )
     }
