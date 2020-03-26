@@ -2,4 +2,21 @@ import { render } from 'preact';
 import Finder from './finder/Finder';
 import './data/app.css';
 
-render(<Finder />, document.body);
+import base from './settings/themes/base';
+import tempFinderMenu from './data/menus/tempFinderMenu'
+import tempOSMenu from './data/menus/tempOSMenu'
+
+// todo: make a dict of installed applications here
+const installedApplications = {
+    appname: "App (import first)"
+}
+
+render(
+    <Finder
+        theme={base}
+        finderMenu={tempFinderMenu}
+        tempOSMenu={tempOSMenu}
+        installedApplications={installedApplications}
+    />,
+    document.body
+);

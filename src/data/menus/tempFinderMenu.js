@@ -1,4 +1,4 @@
-const testmenu = { name: "test", items: [
+const tempFinderMenu = { name: "test", items: [
     { name: "Studio", items: [
         { name: "About Us", app:"textviewer", options:{  } },
         { name: "Team" },
@@ -17,4 +17,4 @@ const testmenu = { name: "test", items: [
     ]}
 ]}
 
-export default testmenu
+export default tempFinderMenu

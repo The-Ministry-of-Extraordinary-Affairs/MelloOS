@@ -1,21 +1,27 @@
 import { Component, h } from 'preact';
 import { ThemeProvider } from 'styled-components';
 
-import base from '../settings/themes/base';
+/* The Finder */
 
 class Finder extends Component {
-    constructor(){
+    constructor(props){
         super();
         this.state = {
-            applications: []
+            theme: props.theme,
+            finderMenu: props.finderMenu,
+            tempOSMenu: props.tempOSMenu,
+            installedApplications: props.installedApplications
         }
-    };
+    }
 
     render(){
+        const {
+            theme
+        } = this.state;
         return(
-            <ThemeProvider theme={base}>
+            <ThemeProvider theme={theme}>
                 <main>
-                    We're back.
+                    We're back!
                 </main>
             </ThemeProvider>
         )

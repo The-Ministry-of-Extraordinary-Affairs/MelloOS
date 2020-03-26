@@ -1,4 +1,4 @@
-const testrocket = { name: "testrocket", items: [
+const tempOSMenu = { name: "testrocket", items: [
     { name: "🚀", items: [
         { name: "Thank you" },
         { name: "for choosing" },
@@ -6,4 +6,4 @@ const testrocket = { name: "testrocket", items: [
     ]}
 ]}
 
-export default testrocket
+export default tempOSMenu
