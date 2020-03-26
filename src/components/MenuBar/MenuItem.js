@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Box, flexBuilder, fontBuilder } from '../helpers';
+import { Box, flexBuilder, fontBuilder, interactionBuilder } from '../helpers';
 
 const StyledMenuItem = styled(Box)`
     height: 100%;
@@ -7,7 +7,7 @@ const StyledMenuItem = styled(Box)`
     align-items: center;
     ${flexBuilder()}
     ${fontBuilder("primary", 4)}
-    span { margin: auto; }
+    ${interactionBuilder(false)}
 `
 
 const MenuItem = ({

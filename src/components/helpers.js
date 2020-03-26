@@ -14,6 +14,7 @@ export const Box = styled.div`
     box-sizing: border-box;
     background-color: ${({theme}) => theme.colours.background };
     color: ${({theme}) => theme.colours.foreground };
+    user-select: none;
 `
 
 // Adds flex styles to Box primitive.
@@ -24,7 +25,7 @@ export const flexBuilder = (dir="row", grow=0, shrink=1) => css`
     flex-shrink: ${() => shrink };
 `
 
-// Adds CSS grid styles to Box primitive
+// Adds CSS grid styles to Box primitive.
 export const gridBuilder = () => css``
 
 // Adds floating effect to Box primitive.
@@ -45,4 +46,22 @@ export const borderBuilder = (borders="all", style="default") => css`
 export const fontBuilder = (font="primary", size=3) => css`
     font-family: ${({theme}) => (theme.fonts[font])};
     font-size: ${({theme}) => (theme.fontSizes[size])};
+`
+
+// The interactionBuilder generates event styles for interactive elements.
+const hoverCSS = css`
+    :hover {
+        background-color: ${({theme}) => theme.colours.foreground };
+        color: ${({theme}) => theme.colours.background };
+    }
+`
+const activeCSS = css`
+    :active {
+        background-color: ${({theme}) => theme.colours.foreground };
+        color: ${({theme}) => theme.colours.background };
+    }
+`
+export const interactionBuilder = (hover=true, active=true) => css`
+    ${() => hover && hoverCSS }
+    ${() => active && activeCSS }
 `
