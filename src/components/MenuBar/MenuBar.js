@@ -12,19 +12,19 @@ import Menu from './Menu'
 const StyledMenuBar = styled(Box)`
     height: ${({theme}) => theme.sizes.menuBar };
     ${borderBuilder("b")}
-    ${flexBuilder}
+    ${flexBuilder()}
 `
 
 const MenuBar = ({
     osMenu,
-    finderMenu,
+    appMenu,
     ...props
 }) => {
     return(
         <StyledMenuBar>
             <Menu menu={osMenu} />
-            <Menu menu={finderMenu} />
-            <Menu> Status Menu </Menu>
+            <Menu menu={appMenu} />
+            <Menu menu={ {items:[{name:"hello"}]}} right />
         </StyledMenuBar>
     )
 }

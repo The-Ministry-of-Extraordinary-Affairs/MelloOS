@@ -24,6 +24,6 @@ html, body, main {
 }
 * { /* <-- FF does not inherit, so needs explicit disabling on all dom nodes */
     scrollbar-width: none;   /* FF */
-    overflow: -moz-scrollbars-none;     /* FF */
+    overflow: -moz-scrollbars-none;     FF
     -ms-overflow-style: none;           /* IE, Edge */
 }

@@ -17,18 +17,18 @@ export const Box = styled.div`
 `
 
 // Adds flex styles to Box primitive.
-export const flexBuilder = (opt) => css`
+export const flexBuilder = (dir="row", grow=0, shrink=1) => css`
     display: flex;
-    flex-direction: ${() => opt.dir || "row"};
-    flex-grow: ${() => opt.grow || 0 };
-    flex-shrink: ${() => opt.grow || 1 };
+    flex-direction: ${() => dir};
+    flex-grow: ${() => grow};
+    flex-shrink: ${() => shrink };
 `
 
 // Adds CSS grid styles to Box primitive
-export const gridBuilder = (opt) => css``
+export const gridBuilder = () => css``
 
 // Adds floating effect to Box primitive.
-export const floatBuilder = (opt) => css`
+export const floatBuilder = () => css`
     position: absolute;
     box-shadow: ${({theme}) => theme.shadows.floating };
 `
@@ -39,4 +39,10 @@ export const borderBuilder = (borders="all", style="default") => css`
     border-right: ${({theme}) => (borders==="all" || /r/.test(borders)) && theme.borders[style]};
     border-bottom: ${({theme}) => (borders==="all" || /b/.test(borders)) && theme.borders[style]};
     border-left: ${({theme}) => (borders==="all" || /l/.test(borders)) && theme.borders[style]};
+`
+
+// The fontBuilder generates text styles
+export const fontBuilder = (font="primary", size=3) => css`
+    font-family: ${({theme}) => (theme.fonts[font])};
+    font-size: ${({theme}) => (theme.fontSizes[size])};
 `

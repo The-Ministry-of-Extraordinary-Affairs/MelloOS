@@ -1,8 +1,16 @@
 import styled from 'styled-components';
-import { Box, flexBuilder, borderBuilder } from '../helpers';
+import { Box, flexBuilder } from '../helpers';
+
+import MenuItem from './MenuItem';
+
+/*
+    Menus live in the statusbar and contain MenuItems as children.
+    They are either right or left aligned.
+*/
 
 const StyledMenu = styled(Box)`
-    ${flexBuilder}
+    ${({right}) => right && "margin-left: auto;"}
+    ${flexBuilder()};
 `
 
 const Menu = ({
@@ -10,7 +18,11 @@ const Menu = ({
     children,
     ...props
 }) => {
-return <StyledMenu menu={menu} {...props}> {children} </StyledMenu>
+    return(
+        <StyledMenu {...props}>
+            { menu.items.map(item => <MenuItem item={item} />) }
+        </StyledMenu>
+    )
 }
 
 export default Menu
