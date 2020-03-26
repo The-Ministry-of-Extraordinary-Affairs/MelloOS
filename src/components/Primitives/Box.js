@@ -34,31 +34,31 @@ function returnBorder(props, pattern) {
 
 export const Box = styled.div`
     display: flex;
-    flex-direction: ${props => props.vertical ? "column" : "row"};
-    flex-grow: ${ props => props.grow ? 1 : 0 };
+    flex-direction: ${({vertical}) => vertical ? "column" : "row"};
+    flex-grow: ${({grow}) => grow ? 1 : 0 };
 
     margin: 0;
     min-width: 0;
     min-height: 0;
 
-    width: ${ props => props.width ? props.width : "auto" };
-    height: ${ props => props.width ? props.height : "auto" };
+    width: ${({width}) => width ? width : "auto" };
+    height: ${({height}) => height ? height : "auto" };
 
-    cursor: ${ props => props.handle ? "grab" : props.button ? "pointer" : "auto" };
-    :active { cursor: ${ props => props.handle ? "grabbing" : props.button ? "pointer" : "auto" }; }
+    cursor: ${({handle, button}) => handle ? "grab" : button ? "pointer" : "auto" };
+    :active { cursor: ${({handle, button}) => handle ? "grabbing" : button ? "pointer" : "auto" }; }
 
-    color: ${ props => props.theme.colours.foreground };
-    background-color: ${ props => props.theme.colours.background };
+    color: ${({theme}) => theme.colours.foreground };
+    background-color: ${({theme}) => theme.colours.background };
 
     border-top: ${ props => props.theme.borders[returnBorder(props, /border-[a-z]*t[a-z]*/)]};
     border-left: ${ props => props.theme.borders[returnBorder(props, /border-[a-z]*l[a-z]*/)]};
     border-bottom: ${ props => props.theme.borders[returnBorder(props, /border-[a-z]*b[a-z]*/)]};
     border-right: ${ props => props.theme.borders[returnBorder(props, /border-[a-z]*r[a-z]*/)]};
 
-    box-shadow: ${ props => props.theme.shadows.default };
-    ${props => props.floating && css`
+    box-shadow: ${({theme}) => theme.shadows.default };
+    ${({floating}) => floating && css`
         position: absolute;
-        box-shadow: ${ props => props.theme.shadows.floating };
+        box-shadow: ${({theme}) => theme.shadows.floating };
     `}
 `
 

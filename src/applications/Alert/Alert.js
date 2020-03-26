@@ -15,10 +15,30 @@ const Inner = styled.div`
 class Alert extends Component {
     nope = () => { return }
 
-    render(props) {
-        console.log(props)
-        return ( <Window id={ props.id }> <Inner>{ props.options.content } <button onClick={ () => props.close(props.id) }> Close </button> </Inner> </Window> )
+    render({
+        id,
+        options,
+        close,
+        type,
+        ...otherProps
+    }) {
+        return (
+            <Window
+                id={id}
+                options={options}
+            >
+                <Inner>
+                    {options.content}
+                    {type}
+                    <button onClick={ () => close(id) }> Close </button>
+                </Inner>
+            </Window>
+        )
     }
+}
+
+Alert.defaultProps = {
+    type:"HELLO THERE"
 }
 
 export default Alert;
