@@ -23,7 +23,9 @@ const base = {
         default: "none",
         floating: "1px 1px 0px 0px black",
     },
-    sizes: [4, 8, 12, 16, 20, 32, 48, 64,]
+    sizes: {
+        menuBar: "32px"
+    }
 }
 
 export default base

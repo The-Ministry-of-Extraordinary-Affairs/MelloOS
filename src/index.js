@@ -15,7 +15,7 @@ render(
     <Finder
         theme={base}
         finderMenu={tempFinderMenu}
-        tempOSMenu={tempOSMenu}
+        osMenu={tempOSMenu}
         installedApplications={installedApplications}
     />,
     document.body
