@@ -1,6 +1,6 @@
-import { Component } from 'preact';
 import styled from 'styled-components';
 import { Box, interactionBuilder } from '../helpers';
+import { Component } from 'preact';
 
 /*
     Drop Downs are spawned from Menu Items.
@@ -12,10 +12,11 @@ const StyledDropDownItem = styled(Box)`
 `
 
 class DropDownItem extends Component {
-    constructor(props) {
-        super();
-        this.actionHandler = props.actionHandler;
+    handleAction = () => {
+        console.log(this.props.item.name)
+        this.props.actionHandler(this.props.item.name)
     }
+
     render({
         item,
         actionHandler,
@@ -24,7 +25,7 @@ class DropDownItem extends Component {
     }) {
         return(
             <StyledDropDownItem
-                onMouseUp={ this.actionHandler }
+                onMouseUp={ this.handleAction }
                 {...props}
             >
                 { item.name }
@@ -32,5 +33,4 @@ class DropDownItem extends Component {
         )
     }
 }
-
 export default DropDownItem

@@ -23,7 +23,7 @@ class Finder extends Component {
     }
 
     openApp(app) {
-        alert("opening ", app)
+        alert(`opening ${app}`)
     }
 
     render(){
