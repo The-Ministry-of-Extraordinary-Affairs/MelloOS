@@ -36,12 +36,16 @@ class Finder extends Component {
         return(
             <ThemeProvider theme={theme}>
                 <main>
+                    <Window
+                        titleBar
+                        statusBar
+                        scrollBars
+                    />
                     <MenuBar
                         appMenu={finderMenu}
                         osMenu={osMenu}
                         actionHandler={this.openApp}
                     />
-                    <Window />
                 </main>
             </ThemeProvider>
         )
