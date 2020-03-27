@@ -11,12 +11,12 @@ import Box from '../Button/Box'
 import Button from '../Button/Button'
 import Ghost from "./Ghost";
 
-const StyledOuterWindow = styled(Base).attrs(({position, size}) => ({
+const StyledOuterWindow = styled(Base).attrs(({position, size, maximised}) => ({
     style: {
-        top: `${position.top}px`,
-        left: `${position.left}px`,
-        width: `${size.width}px`,
-        height: `${size.height}px`
+        top: `${maximised ? 32 : position.top}px`,
+        left: `${maximised ? 0 : position.left}px`,
+        width: `${maximised ? window.innerWidth : size.width}px`,
+        height: `${maximised ? window.innerHeight - 32 : size.height}px`
     }
 }))`
     display: grid;
@@ -54,13 +54,14 @@ class Window extends Component {
             scrollBars: props.scrollBars,
             dragging: false,
             resizing: false,
+            maximised: props.maximised || false,
             size: {
                 width: props.width || 640,
                 height: props.height || 480,
             },
             position: {
-                left: 50,
-                top: 50,
+                left: props.left || 100,
+                top: props.top || 100,
             },
             offset: {
                 x: 0,
@@ -95,6 +96,7 @@ class Window extends Component {
     }
 
     startDrag = (e) => {
+        if(this.state.maximised) return
         this.setState({
             dragging: true,
             offset: {
@@ -107,7 +109,6 @@ class Window extends Component {
     }
 
     drag = (e) => {
-        if (!this.state.dragging) return
         this.setState({
             position: {
                 left: e.pageX - this.state.offset.x,
@@ -125,6 +126,7 @@ class Window extends Component {
     }
 
     startResize = (e) => {
+        if(this.state.maximised) return
         console.log('go')
         this.setState({
             resizing: true,
@@ -134,7 +136,6 @@ class Window extends Component {
     }
 
     resize = (e) => {
-        if(!this.state.resizing) return
         this.setState({
             offset: {
                 x: e.pageX,
@@ -157,15 +158,22 @@ class Window extends Component {
         e.preventDefault()
     }
 
+    maximise = (e) => {
+        console.log('maximising')
+        this.setState({ maximised: !this.state.maximised })
+        if(!this.state.maximised) return
+    }
+
     log = (e, q) => {
         console.log("click ", q)
     }
 
     render({
+        closeHandler,
         children,
         ...props
     }) {
-        const { titleBar, statusBar, scrollBars, position, size, offset, resizing } = this.state
+        const { titleBar, statusBar, scrollBars, position, size, offset, resizing, maximised } = this.state
         return (
             <>
             <StyledOuterWindow
@@ -174,15 +182,22 @@ class Window extends Component {
                 scrollBars={ scrollBars }
                 position={ position }
                 size={ size }
+                maximised={ maximised }
                 { ...props }
             >
                 { titleBar && <TitleBar
                     dragHandler={this.startDrag}
-                    closeHandler={this.log}
-                    maximiseHandler={this.log}
+                    closeHandler={closeHandler}
+                    maximiseHandler={this.maximise}
                 /> }
                 { statusBar && <StatusBar /> }
-                <InnerWindow>
+                <InnerWindow
+                    dragHandler={this.startDrag}
+                    resizeHandler={this.startResize}
+                    closeHandler={closeHandler}
+                    maximiseHandler={this.maximise}
+                    { ...props }
+                >
                     <Box />
                     <Button>More Choices Please</Button>
                     <Button>Cancel</Button>
