@@ -158,7 +158,7 @@ class Window extends Component {
         e.preventDefault()
     }
 
-    maximise = (e) => {
+    maximise = () => {
         console.log('maximising')
         this.setState({ maximised: !this.state.maximised })
         if(!this.state.maximised) return
