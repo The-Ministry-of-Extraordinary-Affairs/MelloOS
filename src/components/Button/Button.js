@@ -1,23 +1,40 @@
 import styled from 'styled-components'
-import { baseBuilder, fontBuilder, borderBuilder, interactionBuilder } from '../helpers'
+import Box from './Box'
+import { Base, borderBuilder, fontBuilder } from '../helpers'
 
-const StyledButton = styled.button`
-    appearance: none;
-    ${ baseBuilder() }
-    ${ fontBuilder() }
-    ${ borderBuilder() }
-    ${ interactionBuilder(false) }
-    min-width: 20px;
-    min-height: 20px;
-    width: auto;
-    height: auto;
+const StyledPrimaryButton = styled(Base)`
+    ${ borderBuilder("all", "heavy") }
+    border-radius: 12px;
     margin: auto;
+    padding: 2px
+`
+
+const StyledButton = styled(Box)`
+    height: ${({theme}) => theme.sizes.buttonHeight };
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 8px;
+    min-width: 100px;
+    ${ fontBuilder("primary", 4) }
+    :active {
+        ${ borderBuilder("all", "active") }
+    }
 `
 
 const Button = ({
+    primary,
     children,
     ...props
 }) => {
+    if(primary) {
+        return(
+            <StyledPrimaryButton>
+                <StyledButton { ...props } >
+                    { children }
+                </StyledButton>
+            </StyledPrimaryButton>
+        )
+    }
     return(
         <StyledButton { ...props } >
             { children }

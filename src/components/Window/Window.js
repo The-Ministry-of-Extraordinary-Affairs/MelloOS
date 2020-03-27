@@ -7,6 +7,7 @@ import StatusBar from './StatusBar';
 import InnerWindow from './InnerWindow';
 import { VerticalScrollBar, HorizontalScrollBar, SizeBox } from './ScrollBars';
 
+import Box from '../Button/Box'
 import Button from '../Button/Button'
 
 const StyledOuterWindow = styled(Base)`
@@ -50,7 +51,7 @@ class Window extends Component {
             >
                 { titleBar && <TitleBar /> }
                 { statusBar && <StatusBar /> }
-                <InnerWindow> <Button></Button> </InnerWindow>
+                <InnerWindow> <Box /> <Button>More Choices Please</Button> <Button>Cancel</Button> <Button primary>Find</Button> </InnerWindow>
                 { scrollBars && <><VerticalScrollBar /><HorizontalScrollBar /><SizeBox /></> }
             </StyledOuterWindow>
         )
