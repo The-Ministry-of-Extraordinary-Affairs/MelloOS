@@ -10,11 +10,14 @@ import { VerticalScrollBar, HorizontalScrollBar, SizeBox } from './ScrollBars';
 import Box from '../Button/Box'
 import Button from '../Button/Button'
 
-const StyledOuterWindow = styled(Base)`
+const StyledOuterWindow = styled(Base).attrs(({position}) => ({
+    style: {
+        top: `${position.top}px`,
+        left: `${position.left}px`,
+    }
+}))`
     width: 400px;
     height: 400px;
-    left: 100px;
-    top: 100px;
 
     display: grid;
     grid-template:
@@ -38,16 +41,73 @@ class Window extends Component {
             titleBar: props.titleBar,
             statusBar: props.statusBar,
             scrollBars: props.scrollBars,
+            dragging: false,
+            position: {
+                left: 50,
+                top: 50,
+            },
+            offset: {
+                left: 0,
+                top: 0,
+            },
         }
     }
 
+    componentDidUpdate = (props, state) => {
+        if (this.state.dragging && !state.dragging) {
+            document.addEventListener('mousemove', this.drag)
+            document.addEventListener('touchmove', this.drag)
+            document.addEventListener('mouseup', this.endDrag)
+            document.addEventListener('touchend', this.endDrag)
+        } else if (!this.state.dragging && state.dragging) {
+            document.removeEventListener('mousemove', this.drag)
+            document.removeEventListener('touchmove', this.drag)
+            document.removeEventListener('mouseup', this.endDrag)
+            document.removeEventListener('touchend', this.endDrag)
+        }
+    }
+
+    startDrag = (e) => {
+        console.log('hi')
+        this.setState({
+            dragging: true,
+            offset: {
+                left: e.pageX - this.state.position.left,
+                top: e.pageY - this.state.position.top
+            }
+        })
+        e.stopPropagation()
+        e.preventDefault()
+    }
+
+    drag = (e) => {
+        if (!this.state.dragging) return
+        this.setState({
+            position: {
+                left: e.pageX - this.state.offset.left,
+                top: e.pageY - this.state.offset.top,
+            }
+        })
+        e.stopPropagation()
+        e.preventDefault()
+    }
+
+    endDrag = (e) => {
+        this.setState({ dragging: false })
+        e.stopPropagation()
+        e.preventDefault()
+    }
+
     render() {
-        const { titleBar, statusBar, scrollBars } = this.state
+        const { titleBar, statusBar, scrollBars, position } = this.state
         return (
             <StyledOuterWindow
                 titleBar={ titleBar }
                 statusBar={ statusBar }
                 scrollBars={ scrollBars }
+                position={ position }
+                onMouseDown={ this.startDrag }
+                onTouchStart={ this.startDrag }
             >
                 { titleBar && <TitleBar /> }
                 { statusBar && <StatusBar /> }
