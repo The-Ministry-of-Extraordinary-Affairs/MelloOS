@@ -9,16 +9,16 @@ import { VerticalScrollBar, HorizontalScrollBar, SizeBox } from './ScrollBars';
 
 import Box from '../Button/Box'
 import Button from '../Button/Button'
+import Ghost from "./Ghost";
 
-const StyledOuterWindow = styled(Base).attrs(({position}) => ({
+const StyledOuterWindow = styled(Base).attrs(({position, size}) => ({
     style: {
         top: `${position.top}px`,
         left: `${position.left}px`,
+        width: `${size.width}px`,
+        height: `${size.height}px`
     }
 }))`
-    width: 400px;
-    height: 400px;
-
     display: grid;
     grid-template:
         ${({titleBar, scrollBars}) => titleBar && (scrollBars ? `"titlebar titlebar" 32px` : `"titlebar" 32px`) }
@@ -34,6 +34,17 @@ const StyledOuterWindow = styled(Base).attrs(({position}) => ({
     ${floatBuilder()}
 `
 
+const StyledResizeGhost = styled(Ghost).attrs(({position, offset}) => ({
+    style: {
+        top: `${position.top}px`,
+        left: `${position.left}px`,
+        width: `${offset.x - position.left}px`,
+        height: `${offset.y - position.top}px`
+    }
+}))`
+    position: absolute;
+`
+
 class Window extends Component {
     constructor(props) {
         super(props)
@@ -43,13 +54,17 @@ class Window extends Component {
             scrollBars: props.scrollBars,
             dragging: false,
             resizing: false,
+            size: {
+                width: props.width || 640,
+                height: props.height || 480,
+            },
             position: {
                 left: 50,
                 top: 50,
             },
             offset: {
-                left: 0,
-                top: 0,
+                x: 0,
+                y: 0,
             },
         }
     }
@@ -83,8 +98,8 @@ class Window extends Component {
         this.setState({
             dragging: true,
             offset: {
-                left: e.pageX - this.state.position.left,
-                top: e.pageY - this.state.position.top
+                x: e.pageX - this.state.position.left,
+                y: e.pageY - this.state.position.top
             }
         })
         e.stopPropagation()
@@ -95,8 +110,8 @@ class Window extends Component {
         if (!this.state.dragging) return
         this.setState({
             position: {
-                left: e.pageX - this.state.offset.left,
-                top: e.pageY - this.state.offset.top,
+                left: e.pageX - this.state.offset.x,
+                top: e.pageY - this.state.offset.y,
             }
         })
         e.stopPropagation()
@@ -110,6 +125,7 @@ class Window extends Component {
     }
 
     startResize = (e) => {
+        console.log('go')
         this.setState({
             resizing: true,
         })
@@ -119,12 +135,24 @@ class Window extends Component {
 
     resize = (e) => {
         if(!this.state.resizing) return
+        this.setState({
+            offset: {
+                x: e.pageX,
+                y: e.pageY,
+            }
+        })
         e.stopPropagation()
         e.preventDefault()
     }
 
     endResize = (e) => {
-        this.setState({ resizing: false })
+        this.setState({
+            resizing: false,
+            size: {
+                width: this.state.offset.x - this.state.position.left,
+                height: this.state.offset.y - this.state.position.top
+            }
+        })
         e.stopPropagation()
         e.preventDefault()
     }
@@ -137,13 +165,15 @@ class Window extends Component {
         children,
         ...props
     }) {
-        const { titleBar, statusBar, scrollBars, position } = this.state
+        const { titleBar, statusBar, scrollBars, position, size, offset, resizing } = this.state
         return (
+            <>
             <StyledOuterWindow
                 titleBar={ titleBar }
                 statusBar={ statusBar }
                 scrollBars={ scrollBars }
                 position={ position }
+                size={ size }
                 { ...props }
             >
                 { titleBar && <TitleBar
@@ -166,6 +196,11 @@ class Window extends Component {
                     </>
                 }
             </StyledOuterWindow>
+            { resizing && <StyledResizeGhost
+                position={ position }
+                offset={ offset }
+            /> }
+            </>
         )
     }
 }

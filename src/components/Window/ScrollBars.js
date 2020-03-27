@@ -28,6 +28,15 @@ export const HorizontalScrollBar = () => {
     return <StyledHorizontalScrollBar />
 }
 
-export const SizeBox = () => {
-    return <StyledSizeBox />
+export const SizeBox = ({
+    resizeHandler,
+    ...props
+}) => {
+    return(
+        <StyledSizeBox
+            onMouseDown={ resizeHandler }
+            onTouchStart={ resizeHandler }
+            { ...props }
+        />
+    )
 }
