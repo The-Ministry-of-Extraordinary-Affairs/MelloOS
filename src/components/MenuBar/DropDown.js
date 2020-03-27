@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Box, borderBuilder } from '../helpers';
+import { Base, borderBuilder } from '../helpers';
 
 import DropDownItem from './DropDownItem'
 
@@ -7,7 +7,7 @@ import DropDownItem from './DropDownItem'
     Drop Downs are spawned from Menu Items.
 */
 
-const StyledDropDown = styled(Box)`
+const StyledDropDown = styled(Base)`
     position: absolute;
     padding: 8px 0 8px 0;
     margin-left: -8px;

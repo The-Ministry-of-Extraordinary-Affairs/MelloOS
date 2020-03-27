@@ -1,6 +1,6 @@
 import { toChildArray } from 'preact';
 import styled from 'styled-components';
-import { Box, flexBuilder } from '../helpers';
+import { Base, flexBuilder } from '../helpers';
 
 import MenuItem from './MenuItem';
 
@@ -9,7 +9,7 @@ import MenuItem from './MenuItem';
     They are either right or left aligned.
 */
 
-const StyledMenu = styled(Box)`
+const StyledMenu = styled(Base)`
     ${({right}) => right && "margin-left: auto;"}
     ${flexBuilder()};
 `

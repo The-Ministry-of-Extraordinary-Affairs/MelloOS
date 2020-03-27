@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Box, flexBuilder, borderBuilder } from '../helpers';
+import { Base, flexBuilder, borderBuilder } from '../helpers';
 import Menu from './Menu'
 
 /*
@@ -9,7 +9,7 @@ import Menu from './Menu'
         - the Status Menu (conatins status icons and Menu Bar apps)
 */
 
-const StyledMenuBar = styled(Box)`
+const StyledMenuBar = styled(Base)`
     height: ${({theme}) => theme.sizes.menuBar };
     ${borderBuilder("b")}
     ${flexBuilder()}

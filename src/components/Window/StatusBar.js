@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { Box, borderBuilder } from "../helpers";
+import { Base, borderBuilder } from "../helpers";
 
-const StyledStatusBar = styled(Box)`
+const StyledStatusBar = styled(Base)`
     display: grid;
     grid-area: statusbar;
 `
 
-const StyledInnerStatusBar = styled(Box)`
+const StyledInnerStatusBar = styled(Base)`
     height: 30px;
     ${borderBuilder('b')}
 `

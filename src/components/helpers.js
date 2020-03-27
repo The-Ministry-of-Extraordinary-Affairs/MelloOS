@@ -8,8 +8,9 @@ import styled, { css } from 'styled-components';
 */
 
 // Because of the b/w nature of the OS1-7 styling, (nearly) all of our layout elements contain borders.
-// The box element is a primitive element which sets some basic rules, on which our other components are based.
-export const Box = styled.div`
+// The base element is a primitive element which sets some basic rules, on which our other components are based.
+// The base styling is extracted into a baseBuilder in order to aid in styling other DOM elements (e.g. Buttons) as base elements without having to resort to using styled-components' "as".
+export const baseBuilder = () => css`
     display: block;
     box-sizing: border-box;
     background-color: ${({theme}) => theme.colours.background };
@@ -17,7 +18,11 @@ export const Box = styled.div`
     user-select: none;
 `
 
-// Adds flex styles to Box primitive.
+export const Base = styled.div`
+    ${ baseBuilder };
+`
+
+// Adds flex styles to Base primitive.
 export const flexBuilder = (dir="row", grow=0, shrink=1) => css`
     display: flex;
     flex-direction: ${() => dir};
@@ -25,10 +30,10 @@ export const flexBuilder = (dir="row", grow=0, shrink=1) => css`
     flex-shrink: ${() => shrink };
 `
 
-// Adds CSS grid styles to Box primitive.
+// Adds CSS grid styles to Base primitive.
 export const gridBuilder = () => css``
 
-// Adds floating effect to Box primitive.
+// Adds floating effect to Base primitive.
 export const floatBuilder = () => css`
     position: absolute;
     box-shadow: ${({theme}) => theme.shadows.floating };

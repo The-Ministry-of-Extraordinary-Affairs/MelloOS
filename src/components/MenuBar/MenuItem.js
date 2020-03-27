@@ -1,6 +1,6 @@
 import { Component } from 'preact';
 import styled from 'styled-components';
-import { Box, flexBuilder, fontBuilder, interactionBuilder } from '../helpers';
+import { Base, flexBuilder, fontBuilder, interactionBuilder } from '../helpers';
 
 import DropDown from './DropDown'
 
@@ -11,7 +11,7 @@ import DropDown from './DropDown'
     They open a DropDown on click or tap.
 */
 
-const StyledMenuItem = styled(Box)`
+const StyledMenuItem = styled(Base)`
     /* height: 100%; */
     padding: 0 8px 0 8px;
     line-height: 2;

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { Box, interactionBuilder } from '../helpers';
+import { Base, interactionBuilder } from '../helpers';
 import { Component } from 'preact';
 
 /*
     Drop Downs are spawned from Menu Items.
 */
 
-const StyledDropDownItem = styled(Box)`
+const StyledDropDownItem = styled(Base)`
     padding: 0 16px 0 16px;
     ${interactionBuilder()}
 `

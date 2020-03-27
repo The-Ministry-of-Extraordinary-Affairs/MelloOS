@@ -1,19 +1,19 @@
 import styled from "styled-components";
-import { Box } from "../helpers";
+import { Base } from "../helpers";
 
-const StyledVerticalScrollBar = styled(Box)`
+const StyledVerticalScrollBar = styled(Base)`
     display: grid;
     grid-area: verticalscrollbar
 `
 
-const StyledHorizontalScrollBar = styled(Box)`
+const StyledHorizontalScrollBar = styled(Base)`
     display: grid;
     grid-area: horizontalscrollbar
 `
 
-const StyledResizeBox = styled(Box)`
+const StyledSizeBox = styled(Base)`
     display: grid;
-    grid-area: resizebox
+    grid-area: sizebox
 `
 
 export const VerticalScrollBar = () => {
@@ -24,6 +24,6 @@ export const HorizontalScrollBar = () => {
     return <StyledHorizontalScrollBar />
 }
 
-export const ResizeBox = () => {
-    return <StyledResizeBox />
+export const SizeBox = () => {
+    return <StyledSizeBox />
 }

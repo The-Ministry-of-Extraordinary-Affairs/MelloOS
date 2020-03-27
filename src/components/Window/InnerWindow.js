@@ -1,13 +1,20 @@
 import styled from "styled-components";
-import { Box } from "../helpers";
+import { Base } from "../helpers";
 
-const StyledInnerWindow = styled(Box)`
+const StyledInnerWindow = styled(Base)`
     display: grid;
     grid-area: innerwindow
 `
 
-const InnerWindow = () => {
-    return <StyledInnerWindow />
+const InnerWindow = ({
+    children,
+    ...props
+}) => {
+    return(
+        <StyledInnerWindow {...props }>
+            { children }
+        </StyledInnerWindow>
+    )
 }
 
 export default InnerWindow

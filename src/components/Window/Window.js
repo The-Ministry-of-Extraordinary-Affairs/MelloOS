@@ -1,13 +1,15 @@
 import { Component } from "preact";
 import styled from "styled-components";
-import { Box, floatBuilder, borderBuilder } from "../helpers";
+import { Base, floatBuilder, borderBuilder } from "../helpers";
 
 import TitleBar from './TitleBar';
 import StatusBar from './StatusBar';
 import InnerWindow from './InnerWindow';
-import { VerticalScrollBar, HorizontalScrollBar, ResizeBox } from './ScrollBars';
+import { VerticalScrollBar, HorizontalScrollBar, SizeBox } from './ScrollBars';
 
-const StyledOuterWindow = styled(Box)`
+import Button from '../Button/Button'
+
+const StyledOuterWindow = styled(Base)`
     width: 400px;
     height: 400px;
     left: 100px;
@@ -18,7 +20,7 @@ const StyledOuterWindow = styled(Box)`
         ${({titleBar, scrollBars}) => titleBar && (scrollBars ? `"titlebar titlebar" 32px` : `"titlebar" 32px`) }
         ${({statusBar, scrollBars}) => statusBar && (scrollBars ? `"statusbar statusbar" 32px` : `"statusbar" 32px`) }
         "innerwindow ${({scrollBars}) => scrollBars && `verticalscrollbar` }" auto
-        ${({scrollBars}) => scrollBars && `"horizontalscrollbar resizebox" 24px` }
+        ${({scrollBars}) => scrollBars && `"horizontalscrollbar sizebox" 24px` }
         / auto ${({scrollBars}) => scrollBars && `24px` };
 
     grid-gap: 2px;
@@ -48,8 +50,8 @@ class Window extends Component {
             >
                 { titleBar && <TitleBar /> }
                 { statusBar && <StatusBar /> }
-                <InnerWindow />
-                { scrollBars && <><VerticalScrollBar /><HorizontalScrollBar /><ResizeBox /></> }
+                <InnerWindow> <Button></Button> </InnerWindow>
+                { scrollBars && <><VerticalScrollBar /><HorizontalScrollBar /><SizeBox /></> }
             </StyledOuterWindow>
         )
     }

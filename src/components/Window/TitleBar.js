@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Box } from "../helpers";
+import { Base } from "../helpers";
 
-const StyledTitleBar = styled(Box)`
+const StyledTitleBar = styled(Base)`
     display: grid;
     grid-area: titlebar
 `
