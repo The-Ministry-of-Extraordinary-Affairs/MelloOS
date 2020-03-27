@@ -4,7 +4,7 @@ import { Base, flexBuilder } from './helpers'
 /*
 
     Spacers can be used to separate items by a specific distance, or create striped fixed or variable fillers.
-    Their main application is inside the the iconic window TitleBars.
+    Their main application are for the iconic six stripes inside the window TitleBars.
 
 */
 
@@ -36,12 +36,7 @@ const Spacer = ({
             striped={striped}
             {...props}
         >
-            <Stripe />
-            <Stripe />
-            <Stripe />
-            <Stripe />
-            <Stripe />
-            <Stripe />
+            {Array(6).fill().map(() => <Stripe />)}
         </StyledSpacer>
     )
 }

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { baseBuilder, borderBuilder, interactionBuilder } from '../helpers'
+import { Component } from 'preact'
 
 const StyledBox = styled.button`
     appearance: none;
@@ -13,15 +14,26 @@ const StyledBox = styled.button`
     margin: auto;
 `
 
-const Box = ({
-    children,
-    ...props
-}) => {
-    return(
-        <StyledBox { ...props } >
-            { children }
-        </StyledBox>
-    )
+class Box extends Component {
+    stopProp = (e) => {
+        e.stopPropagation();
+    }
+
+    render({
+        children,
+        ...props
+    }) {
+        return(
+            <StyledBox
+                onMouseDown={ this.stopProp }
+                onTouchStart={ this.stopProp }
+                onClick={ this.stopProp }
+                { ...props }
+            >
+                { children }
+            </StyledBox>
+        )
+    }
 }
 
 export default Box

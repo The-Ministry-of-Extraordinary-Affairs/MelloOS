@@ -42,6 +42,7 @@ class Window extends Component {
             statusBar: props.statusBar,
             scrollBars: props.scrollBars,
             dragging: false,
+            resizing: false,
             position: {
                 left: 50,
                 top: 50,
@@ -65,10 +66,20 @@ class Window extends Component {
             document.removeEventListener('mouseup', this.endDrag)
             document.removeEventListener('touchend', this.endDrag)
         }
+        if (this.state.resizing && !state.resizing) {
+            document.addEventListener('mousemove', this.resize)
+            document.addEventListener('touchmove', this.resize)
+            document.addEventListener('mouseup', this.endResize)
+            document.addEventListener('touchend', this.endResize)
+        } else if (!this.state.resizing && state.resizing) {
+            document.removeEventListener('mousemove', this.resize)
+            document.removeEventListener('touchmove', this.resize)
+            document.removeEventListener('mouseup', this.endResize)
+            document.removeEventListener('touchend', this.endResize)
+        }
     }
 
     startDrag = (e) => {
-        console.log('hi')
         this.setState({
             dragging: true,
             offset: {
@@ -98,7 +109,34 @@ class Window extends Component {
         e.preventDefault()
     }
 
-    render() {
+    startResize = (e) => {
+        this.setState({
+            resizing: true,
+        })
+        e.stopPropagation()
+        e.preventDefault()
+    }
+
+    resize = (e) => {
+        if(!this.state.resizing) return
+        e.stopPropagation()
+        e.preventDefault()
+    }
+
+    endResize = (e) => {
+        this.setState({ resizing: false })
+        e.stopPropagation()
+        e.preventDefault()
+    }
+
+    log = (e, q) => {
+        console.log("click ", q)
+    }
+
+    render({
+        children,
+        ...props
+    }) {
         const { titleBar, statusBar, scrollBars, position } = this.state
         return (
             <StyledOuterWindow
@@ -106,13 +144,27 @@ class Window extends Component {
                 statusBar={ statusBar }
                 scrollBars={ scrollBars }
                 position={ position }
-                onMouseDown={ this.startDrag }
-                onTouchStart={ this.startDrag }
+                { ...props }
             >
-                { titleBar && <TitleBar /> }
+                { titleBar && <TitleBar
+                    dragHandler={this.startDrag}
+                    closeHandler={this.log}
+                    maximiseHandler={this.log}
+                /> }
                 { statusBar && <StatusBar /> }
-                <InnerWindow> <Box /> <Button>More Choices Please</Button> <Button>Cancel</Button> <Button primary>Find</Button> </InnerWindow>
-                { scrollBars && <><VerticalScrollBar /><HorizontalScrollBar /><SizeBox /></> }
+                <InnerWindow>
+                    <Box />
+                    <Button>More Choices Please</Button>
+                    <Button>Cancel</Button>
+                    <Button primary>Find</Button>
+                    { children }
+                </InnerWindow>
+                { scrollBars && <>
+                        <VerticalScrollBar />
+                        <HorizontalScrollBar />
+                        <SizeBox resizeHandler={this.startResize} />
+                    </>
+                }
             </StyledOuterWindow>
         )
     }

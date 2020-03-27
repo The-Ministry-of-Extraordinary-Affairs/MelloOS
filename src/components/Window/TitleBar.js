@@ -14,16 +14,25 @@ const StyledTitle = styled(Base)`
     margin: auto 16px;
 `
 
-const TitleBar = () => {
+const TitleBar = ({
+    dragHandler,
+    closeHandler,
+    maximiseHandler,
+    ...props
+}) => {
     return(
-        <StyledTitleBar>
-            <Spacer height={"24px"} width={"8px"} />
-            <Box />
-            <Spacer height={"24px"} />
+        <StyledTitleBar
+            onMouseDown={ dragHandler }
+            onTouchStart={ dragHandler }
+            {...props}
+        >
+            <Spacer height={"24px"} width={"8px"} striped />
+            <Box onClick={closeHandler} />
+            <Spacer height={"24px"} striped />
             <StyledTitle>This is Sparta</StyledTitle>
-            <Spacer height={"24px"} />
-            <Box />
-            <Spacer height={"24px"} width={"8px"} />
+            <Spacer height={"24px"} striped />
+            <Box onClick={maximiseHandler} />
+            <Spacer height={"24px"} width={"8px"} striped />
         </StyledTitleBar>
     )
 }
