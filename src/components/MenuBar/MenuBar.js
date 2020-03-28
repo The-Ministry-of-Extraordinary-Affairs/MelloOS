@@ -10,7 +10,11 @@ import Menu from './Menu'
 */
 
 const StyledMenuBar = styled(Base)`
+    position: fixed;
+    top: 0;
+    left: 0;
     height: ${({theme}) => theme.sizes.menuBar };
+    width: 100%;
     ${borderBuilder("b")}
     ${flexBuilder()}
 `

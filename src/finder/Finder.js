@@ -3,6 +3,8 @@ import { ThemeProvider } from 'styled-components';
 
 import MenuBar from '../components/MenuBar/MenuBar'
 import Window from '../components/Window/Window';
+import Desktop from '../components/Desktop/Desktop';
+import Alert from '../components/Alert/Alert';
 
 /*
 
@@ -36,11 +38,13 @@ class Finder extends Component {
         return(
             <ThemeProvider theme={theme}>
                 <main>
+                    <Desktop />
                     <Window
                         titleBar
                         statusBar
                         scrollBars
                     />
+                    <Alert>Dance for me, puppet!</Alert>
                     <MenuBar
                         appMenu={finderMenu}
                         osMenu={osMenu}

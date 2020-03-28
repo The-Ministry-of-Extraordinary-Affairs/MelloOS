@@ -198,10 +198,6 @@ class Window extends Component {
                     maximiseHandler={this.maximise}
                     { ...props }
                 >
-                    <Box />
-                    <Button>More Choices Please</Button>
-                    <Button>Cancel</Button>
-                    <Button primary>Find</Button>
                     { children }
                 </InnerWindow>
                 { scrollBars && <>
