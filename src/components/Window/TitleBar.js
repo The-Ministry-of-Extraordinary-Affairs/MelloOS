@@ -5,6 +5,8 @@ import Box from "../Button/Box";
 
 const StyledTitleBar = styled(Base)`
     ${flexBuilder()}
+    max-width: 100%;
+    overflow: hidden;
     align-items: center;
     grid-area: titlebar;
 `
@@ -12,6 +14,10 @@ const StyledTitleBar = styled(Base)`
 const StyledTitle = styled(Base)`
     ${fontBuilder("primary", 5)}
     margin: auto 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
 `
 
 const TitleBar = ({
@@ -29,7 +35,7 @@ const TitleBar = ({
             <Spacer height={"24px"} width={"8px"} striped />
             <Box onClick={closeHandler} />
             <Spacer height={"24px"} striped />
-            <StyledTitle>This is Sparta</StyledTitle>
+            <StyledTitle>This is Sparta djklajdkals jdaslkjdakl</StyledTitle>
             <Spacer height={"24px"} striped />
             <Box onClick={maximiseHandler} />
             <Spacer height={"24px"} width={"8px"} striped />

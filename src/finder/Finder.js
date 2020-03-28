@@ -46,7 +46,7 @@ class Finder extends Component {
                         />
                         <Icon
                             src="../data/img/trash.svg"
-                            label="MelloOS"
+                            label="Trash"
                             top={window.innerHeight - 100}
                         />
                     </Desktop>

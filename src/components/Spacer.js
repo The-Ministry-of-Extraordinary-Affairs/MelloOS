@@ -11,6 +11,7 @@ import { Base, flexBuilder } from './helpers'
 const StyledSpacer = styled(Base)`
     height: ${({height}) => height ? height : "100%" };
     width: ${({width}) => width ? width : "auto" };
+    min-width: 8px;
     margin: 0px 2px;
     ${({width}) => flexBuilder("column", width ? 0 : 1 , 1)}
     vertical-align: middle;
