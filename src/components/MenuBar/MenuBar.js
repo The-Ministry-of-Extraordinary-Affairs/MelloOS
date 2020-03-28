@@ -30,7 +30,7 @@ const MenuBar = ({
         <StyledMenuBar {...props} >
             <Menu menu={osMenu} actionHandler={actionHandler} {...props} />
             <Menu menu={appMenu} actionHandler={actionHandler} {...props} />
-            <Menu right {...props}>
+            <Menu right {...props} actionHandler={actionHandler} {...props} >
                 { statusMenu.map((item) => item) }
             </Menu>
         </StyledMenuBar>

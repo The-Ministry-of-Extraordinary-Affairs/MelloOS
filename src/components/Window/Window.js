@@ -52,6 +52,7 @@ class Window extends Component {
             titleBar: props.titleBar,
             statusBar: props.statusBar,
             scrollBars: props.scrollBars,
+            title: props.title || "untitled window",
             dragging: false,
             resizing: false,
             maximised: props.maximised || false,
@@ -173,7 +174,7 @@ class Window extends Component {
         children,
         ...props
     }) {
-        const { titleBar, statusBar, scrollBars, position, size, offset, resizing, maximised } = this.state
+        const { titleBar, statusBar, scrollBars, position, size, offset, resizing, maximised, title } = this.state
         return (
             <>
             <StyledOuterWindow
@@ -189,6 +190,7 @@ class Window extends Component {
                     dragHandler={this.startDrag}
                     closeHandler={closeHandler}
                     maximiseHandler={this.maximise}
+                    title={title}
                 /> }
                 { statusBar && <StatusBar /> }
                 <InnerWindow

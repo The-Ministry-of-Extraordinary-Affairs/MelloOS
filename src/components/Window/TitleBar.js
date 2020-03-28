@@ -24,6 +24,7 @@ const TitleBar = ({
     dragHandler,
     closeHandler,
     maximiseHandler,
+    title,
     ...props
 }) => {
     return(
@@ -35,7 +36,7 @@ const TitleBar = ({
             <Spacer height={"24px"} width={"8px"} striped />
             <Box onClick={closeHandler} />
             <Spacer height={"24px"} striped />
-            <StyledTitle>This is Sparta djklajdkals jdaslkjdakl</StyledTitle>
+            <StyledTitle>{title}</StyledTitle>
             <Spacer height={"24px"} striped />
             <Box onClick={maximiseHandler} />
             <Spacer height={"24px"} width={"8px"} striped />

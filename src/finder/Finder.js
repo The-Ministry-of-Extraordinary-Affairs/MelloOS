@@ -2,11 +2,11 @@ import { Component, h } from 'preact';
 import { ThemeProvider } from 'styled-components';
 
 import MenuBar from '../components/MenuBar/MenuBar'
-import Window from '../components/Window/Window';
 import Desktop from '../components/Desktop/Desktop';
-import Alert from '../components/Alert/Alert';
-import Icon from '../components/Icon/Icon';
 
+import WindowManager from './WindowManager'
+
+import Icon from '../components/Icon/Icon';
 import Clock from '../applications/Clock/Clock'
 
 /*
@@ -52,12 +52,7 @@ class Finder extends Component {
                             top={window.innerHeight - 100}
                         />
                     </Desktop>
-                    <Window
-                        titleBar
-                        statusBar
-                        scrollBars
-                    />
-                    <Alert>Dance for me, puppet!</Alert>
+                    <WindowManager />
                     <MenuBar
                         appMenu={finderMenu}
                         osMenu={osMenu}
