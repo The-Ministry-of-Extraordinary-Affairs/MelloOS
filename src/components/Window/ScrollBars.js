@@ -1,15 +1,23 @@
 import styled from "styled-components";
-import { Base } from "../helpers";
+import { Base, flexBuilder, borderBuilder } from "../helpers";
 import Box from "../Button/Box";
 
 const StyledVerticalScrollBar = styled(Base)`
-    display: grid;
-    grid-area: verticalscrollbar
+    grid-area: verticalscrollbar;
+    ${flexBuilder("column")}
+    width: 100%;
+    height: 100%;
 `
 
 const StyledHorizontalScrollBar = styled(Base)`
-    display: grid;
-    grid-area: horizontalscrollbar
+    grid-area: horizontalscrollbar;
+    ${flexBuilder("row")}
+    width: 100%;
+    height: 100%;
+`
+
+const StyledScrollBar = styled(Base)`
+    ${flexBuilder("row", 1, 0)}
 `
 
 const StyledSizeBox = styled(Box)`
@@ -20,12 +28,32 @@ const StyledSizeBox = styled(Box)`
     grid-area: sizebox
 `
 
+const StyledScrollBox = styled(Box)`
+    transform: rotate(${({rot}) => rot});
+    width: 24px;
+    height: 24px;
+    border: none;
+    ${ borderBuilder("b", "default") }
+`
+
 export const VerticalScrollBar = () => {
-    return <StyledVerticalScrollBar />
+    return(
+        <StyledVerticalScrollBar>
+            <StyledScrollBox rot={'0deg'} />
+            <StyledScrollBar />
+            <StyledScrollBox rot={'180deg'} />
+        </StyledVerticalScrollBar>
+    )
 }
 
 export const HorizontalScrollBar = () => {
-    return <StyledHorizontalScrollBar />
+    return(
+        <StyledHorizontalScrollBar>
+            <StyledScrollBox rot={'270deg'} />
+            <StyledScrollBar />
+            <StyledScrollBox rot={'90deg'} />
+        </StyledHorizontalScrollBar>
+    )
 }
 
 export const SizeBox = ({
