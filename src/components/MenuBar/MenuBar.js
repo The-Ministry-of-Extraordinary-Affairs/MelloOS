@@ -22,6 +22,7 @@ const StyledMenuBar = styled(Base)`
 const MenuBar = ({
     osMenu,
     appMenu,
+    statusMenu,
     actionHandler,
     ...props
 }) => {
@@ -29,7 +30,9 @@ const MenuBar = ({
         <StyledMenuBar {...props} >
             <Menu menu={osMenu} actionHandler={actionHandler} {...props} />
             <Menu menu={appMenu} actionHandler={actionHandler} {...props} />
-            <Menu right {...props}>13:37</Menu>
+            <Menu right {...props}>
+                { statusMenu.map((item) => item) }
+            </Menu>
         </StyledMenuBar>
     )
 }

@@ -7,6 +7,8 @@ import Desktop from '../components/Desktop/Desktop';
 import Alert from '../components/Alert/Alert';
 import Icon from '../components/Icon/Icon';
 
+import Clock from '../applications/Clock/Clock'
+
 /*
 
     The Finder is the main UI manager.
@@ -59,6 +61,7 @@ class Finder extends Component {
                     <MenuBar
                         appMenu={finderMenu}
                         osMenu={osMenu}
+                        statusMenu={[<Clock />]}
                         actionHandler={this.openApp}
                     />
                 </main>
