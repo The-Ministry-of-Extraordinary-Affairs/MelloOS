@@ -1,3 +1,4 @@
+import { toChildArray } from 'preact'
 import styled from 'styled-components';
 import { Base, borderBuilder } from '../helpers';
 
@@ -23,7 +24,8 @@ const DropDown = ({
 }) => {
     return(
         <StyledDropDown {...props}>
-            { items.map(item => <DropDownItem item={item} actionHandler={actionHandler} {...props} />) }
+            { items && items.map(item => <DropDownItem item={item} actionHandler={actionHandler} {...props} />) }
+            { children && toChildArray(children).map(item => <DropDownItem item={item} actionHandler={actionHandler} {...props} />) }
         </StyledDropDown>
     )
 }

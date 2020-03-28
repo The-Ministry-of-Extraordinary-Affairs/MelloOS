@@ -27,7 +27,7 @@ class DropDownItem extends Component {
                 onMouseUp={ this.handleAction }
                 {...props}
             >
-                { item.name }
+                { item.name && item.name }
             </StyledDropDownItem>
         )
     }
