@@ -5,6 +5,7 @@ import MenuBar from '../components/MenuBar/MenuBar'
 import Window from '../components/Window/Window';
 import Desktop from '../components/Desktop/Desktop';
 import Alert from '../components/Alert/Alert';
+import Icon from '../components/Icon/Icon';
 
 /*
 
@@ -38,7 +39,17 @@ class Finder extends Component {
         return(
             <ThemeProvider theme={theme}>
                 <main>
-                    <Desktop />
+                    <Desktop>
+                        <Icon
+                            src="../data/img/se.svg"
+                            label="MelloOS"
+                        />
+                        <Icon
+                            src="../data/img/trash.svg"
+                            label="MelloOS"
+                            top={window.innerHeight - 100}
+                        />
+                    </Desktop>
                     <Window
                         titleBar
                         statusBar

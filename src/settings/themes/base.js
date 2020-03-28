@@ -27,7 +27,8 @@ const base = {
     sizes: {
         menuBar: "32px",
         scrollBar: "24px",
-        buttonHeight: "32px"
+        buttonHeight: "32px",
+        icon: "64px",
     },
     fontSizes: ["6px", "8px", "10px", "12px", "16px", "20px", "24px", "32px", "48px", "64px"]
 }
