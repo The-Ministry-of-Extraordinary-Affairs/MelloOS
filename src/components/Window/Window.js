@@ -49,6 +49,8 @@ class Window extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            id: props.id,
+            closeHandler: props.closeHandler,
             titleBar: props.titleBar,
             statusBar: props.statusBar,
             scrollBars: props.scrollBars,
@@ -69,6 +71,10 @@ class Window extends Component {
                 y: 0,
             },
         }
+    }
+
+    close = () => {
+        this.state.closeHandler(this.state.id)
     }
 
     componentDidUpdate = (props, state) => {
@@ -174,10 +180,11 @@ class Window extends Component {
         children,
         ...props
     }) {
-        const { titleBar, statusBar, scrollBars, position, size, offset, resizing, maximised, title } = this.state
+        const { id, titleBar, statusBar, scrollBars, position, size, offset, resizing, maximised, title } = this.state
         return (
             <>
             <StyledOuterWindow
+                id={id}
                 titleBar={ titleBar }
                 statusBar={ statusBar }
                 scrollBars={ scrollBars }
@@ -188,7 +195,7 @@ class Window extends Component {
             >
                 { titleBar && <TitleBar
                     dragHandler={this.startDrag}
-                    closeHandler={closeHandler}
+                    closeHandler={this.close}
                     maximiseHandler={this.maximise}
                     title={title}
                 /> }
@@ -196,7 +203,7 @@ class Window extends Component {
                 <InnerWindow
                     dragHandler={this.startDrag}
                     resizeHandler={this.startResize}
-                    closeHandler={closeHandler}
+                    closeHandler={this.close}
                     maximiseHandler={this.maximise}
                     { ...props }
                 >
