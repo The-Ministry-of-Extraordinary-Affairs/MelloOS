@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Base, borderBuilder } from "../helpers";
+import CheckBox from "../CheckBox/CheckBox";
 
 const StyledInnerWindow = styled(Base)`
     display: block;
@@ -19,6 +20,7 @@ const InnerWindow = ({
 }) => {
     return(
         <StyledInnerWindow {...props }>
+            <CheckBox />
             { inset ? <StyledInset> { children } </StyledInset> : <> { children } </> }
         </StyledInnerWindow>
     )
