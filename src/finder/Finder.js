@@ -106,6 +106,7 @@ class Finder extends Component {
                         scrollBars
                         closeHandler={this.closeWindow}
                     >{ window.content && window.content }</Window>) }
+                    <Alert>Pretty cool this!</Alert>
                 </main>
             </ThemeProvider>
         )

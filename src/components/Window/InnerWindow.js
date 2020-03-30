@@ -1,18 +1,25 @@
 import styled from "styled-components";
-import { Base } from "../helpers";
+import { Base, borderBuilder, flexBuilder } from "../helpers";
 
 const StyledInnerWindow = styled(Base)`
-    display: grid;
-    grid-area: innerwindow
+    display: block;
+    grid-area: innerwindow;
+`
+
+const StyledInset = styled(Base)`
+    margin: 2px;
+    height: calc(100% - 4px);
+    ${ borderBuilder("all", "heavy") }
 `
 
 const InnerWindow = ({
     children,
+    inset,
     ...props
 }) => {
     return(
         <StyledInnerWindow {...props }>
-            { children }
+            { inset ? <StyledInset> { children } </StyledInset> : <> { children } </> }
         </StyledInnerWindow>
     )
 }

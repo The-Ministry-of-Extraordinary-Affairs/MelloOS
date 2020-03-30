@@ -4,10 +4,7 @@ import Window from "../Window/Window"
 import Button from "../Button/Button";
 
 const StyledAlert = styled(Base)`
-    display: flex;
-    flex-direction: row;
-    margin: 2px;
-    ${ borderBuilder("all", "heavy") }
+
 `
 
 const Alert = ({
@@ -22,6 +19,7 @@ const Alert = ({
             height={100}
             top={200}
             left={200}
+            inset={true}
             { ...props }
         >
             <StyledAlert
