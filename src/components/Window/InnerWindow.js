@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Base, borderBuilder, flexBuilder } from "../helpers";
+import { Base, borderBuilder } from "../helpers";
 
 const StyledInnerWindow = styled(Base)`
     display: block;

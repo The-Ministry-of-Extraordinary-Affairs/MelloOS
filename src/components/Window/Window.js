@@ -7,8 +7,6 @@ import StatusBar from './StatusBar';
 import InnerWindow from './InnerWindow';
 import { VerticalScrollBar, HorizontalScrollBar, SizeBox } from './ScrollBars';
 
-import Box from '../Button/Box'
-import Button from '../Button/Button'
 import Ghost from "./Ghost";
 
 const StyledOuterWindow = styled(Base).attrs(({position, size, maximised}) => ({
