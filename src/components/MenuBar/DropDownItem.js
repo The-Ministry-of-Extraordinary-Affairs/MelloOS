@@ -13,7 +13,7 @@ const StyledDropDownItem = styled(Base)`
 
 class DropDownItem extends Component {
     handleAction = () => {
-        this.props.actionHandler(this.props.item.name)
+        this.props.actionHandler(this.props.item.app, this.props.item.location)
     }
 
     render({

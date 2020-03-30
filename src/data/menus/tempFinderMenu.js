@@ -5,7 +5,7 @@ const tempFinderMenu = { name: "test", items: [
         { name: "Exhibitions" }
     ] },
     { name: "Projects", items: [
-        { name: "Project 1", app:"propjectviewer", options:{ location:"/data/projects/project1.md" } },
+        { name: "Project 1", app:"projectviewer", location:"/data/projects/project1.md" },
         { name: "Project 2" },
         { name: "Project 3" },
         { name: "Project 4" },

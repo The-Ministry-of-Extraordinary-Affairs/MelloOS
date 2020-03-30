@@ -8,7 +8,7 @@ class WindowManager extends Component {
         super(props)
         this.state = {
             windows: [
-                {title: 'haj', id:1000},
+                {title: 'haj', id:1000, content:"bakkes"},
                 {title: 'dikke', id:2000},
                 {title: 'papzak', id:3000},
             ]
@@ -41,7 +41,7 @@ class WindowManager extends Component {
                 scrollBars
                 closeHandler={this.closeWindow}
                 {...props}
-            />) }
+            >{ window.content && window.content }</Window>) }
             </>
         )
     }
