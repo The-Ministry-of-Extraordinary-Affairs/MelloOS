@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Base } from "../helpers";
 import Window from "../Window/Window"
 import Button from "../Button/Button";
+import Select from "../Select/Select";
 
 const StyledAlert = styled(Base)`
 
@@ -32,6 +33,7 @@ const Alert = ({
             >
                 { children }
                 <Button onClick={close} >Cancel</Button> <Button onClick={close} primary>Okay</Button>
+                <Select />
             </StyledAlert>
         </Window>
     )

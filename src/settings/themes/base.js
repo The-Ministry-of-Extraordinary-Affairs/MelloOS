@@ -23,11 +23,13 @@ const base = {
     shadows: {
         default: "none",
         floating: "1px 1px 0px 0px black",
+        select: "2px 2px 0px 0px black",
     },
     sizes: {
         menuBar: "32px",
         scrollBar: "24px",
         buttonHeight: "32px",
+        select: "28px",
         icon: "64px",
     },
     fontSizes: ["6px", "8px", "10px", "12px", "16px", "20px", "24px", "32px", "48px", "64px"]
