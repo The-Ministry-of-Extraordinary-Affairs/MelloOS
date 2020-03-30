@@ -12,6 +12,8 @@ import MenuItem from './MenuItem';
 const StyledMenu = styled(Base)`
     ${({right}) => right && "margin-left: auto;"}
     ${flexBuilder()};
+    overflow-x: scroll;
+    overflow-y: hidden;
 `
 
 const Menu = ({
