@@ -3,13 +3,15 @@ import Box from './Box'
 import { Base, borderBuilder, fontBuilder } from '../helpers'
 
 const StyledPrimaryButton = styled(Base)`
+    display: inline-block;
     ${ borderBuilder("all", "heavy") }
     border-radius: 12px;
     margin: auto;
-    padding: 2px
+    padding: 2px;
 `
 
 const StyledButton = styled(Box)`
+    display: inline-block;
     height: ${({theme}) => theme.sizes.buttonHeight };
     padding-left: 16px;
     padding-right: 16px;
