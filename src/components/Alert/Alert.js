@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Base, borderBuilder } from "../helpers";
+import { Base } from "../helpers";
 import Window from "../Window/Window"
 import Button from "../Button/Button";
 
@@ -7,16 +7,21 @@ const StyledAlert = styled(Base)`
 
 `
 
+
 const Alert = ({
+    id,
+    closeHandler,
     children,
     ...props
 }) => {
+    const close = () => closeHandler(id)
     return(
         <Window
+            id={id}
             titleBar={false}
             statusBar={false}
             scrollBars={false}
-            height="auto"
+            height={100}
             top={200}
             left={200}
             inset={true}
@@ -26,7 +31,7 @@ const Alert = ({
                 { ...props }
             >
                 { children }
-                <Button>Cancel</Button> <Button primary>Okay</Button>
+                <Button onClick={close} >Cancel</Button> <Button onClick={close} primary>Okay</Button>
             </StyledAlert>
         </Window>
     )

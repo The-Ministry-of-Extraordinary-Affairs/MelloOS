@@ -15,11 +15,12 @@ const StyledInset = styled(Base)`
 const InnerWindow = ({
     children,
     inset,
+    closeHandler,
     ...props
 }) => {
     return(
-        <StyledInnerWindow {...props }>
-            { inset ? <StyledInset> { children } </StyledInset> : <> { children } </> }
+        <StyledInnerWindow closeHandler={closeHandler} {...props }>
+            { inset ? <StyledInset closeHandler={closeHandler} > { children } </StyledInset> : <> { children } </> }
         </StyledInnerWindow>
     )
 }
