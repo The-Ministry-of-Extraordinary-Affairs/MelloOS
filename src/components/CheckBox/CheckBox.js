@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { baseBuilder, borderBuilder, interactionBuilder } from '../helpers'
+import { baseBuilder, borderBuilder } from '../helpers'
 import { Component } from 'preact'
 
 const StyledCheckBox = styled.input.attrs({ type: 'checkbox' })`
