@@ -26,4 +26,5 @@ html, body, main {
     scrollbar-width: none;   /* FF */
     overflow: -moz-scrollbars-none;     /* FF */
     -ms-overflow-style: none;           /* IE, Edge */
+    border-radius: 0;   /* Safari's stupid borders */
 }

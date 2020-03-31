@@ -3,6 +3,7 @@ import { Base } from "../helpers";
 import Window from "../Window/Window"
 import Button from "../Button/Button";
 import Select from "../Select/Select";
+import CheckBox from "../CheckBox/CheckBox";
 
 const StyledAlert = styled(Base)`
 
@@ -22,9 +23,10 @@ const Alert = ({
             titleBar={false}
             statusBar={false}
             scrollBars={false}
-            height={100}
+            height={200}
+            width={200}
             top={200}
-            left={200}
+            left={0}
             inset={true}
             { ...props }
         >
@@ -33,7 +35,13 @@ const Alert = ({
             >
                 { children }
                 <Button onClick={close} >Cancel</Button> <Button onClick={close} primary>Okay</Button>
-                <Select />
+                <Select>
+                    <option>Hello</option>
+                    <option>Thank you</option>
+                    <option>NautilOS</option>
+                    <option>this is a really long select option in order to see how it goes.</option>
+                </Select>
+                <CheckBox />
             </StyledAlert>
         </Window>
     )

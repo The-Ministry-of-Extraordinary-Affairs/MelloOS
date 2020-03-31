@@ -6,6 +6,7 @@ const StyledCheckBox = styled.input.attrs({ type: 'checkbox' })`
     appearance: none;
     ${ baseBuilder() }
     ${ borderBuilder() }
+    display: inline-block;
 
     width: 22px;
     height: 22px;
