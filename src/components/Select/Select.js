@@ -14,6 +14,8 @@ const StyledSelect = styled.select`
     border-radius: 0;
 
     min-width: 150px;
+    margin: 0 8px;
+    vertical-align: middle;
     padding-left: 16px;
     padding-right: 32px;
 

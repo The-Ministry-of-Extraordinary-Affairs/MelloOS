@@ -6,7 +6,7 @@ const StyledPrimaryButton = styled(Base)`
     display: inline-block;
     ${ borderBuilder("all", "heavy") }
     border-radius: 12px;
-    margin: auto;
+    margin: 0 8px;
     padding: 2px;
 `
 
@@ -16,6 +16,7 @@ const StyledButton = styled(Box)`
     padding-left: 16px;
     padding-right: 16px;
     border-radius: 8px;
+    ${({primary}) => primary || `margin: 0 8px`};
     min-width: 100px;
     ${ fontBuilder("primary", 4) }
     :active {
@@ -31,7 +32,7 @@ const Button = ({
     if(primary) {
         return(
             <StyledPrimaryButton>
-                <StyledButton { ...props } >
+                <StyledButton primary={primary} { ...props } >
                     { children }
                 </StyledButton>
             </StyledPrimaryButton>

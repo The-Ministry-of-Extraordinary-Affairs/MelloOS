@@ -10,7 +10,8 @@ const StyledCheckBox = styled.input.attrs({ type: 'checkbox' })`
 
     width: 22px;
     height: 22px;
-    margin: auto;
+    margin: 0 8px;
+    vertical-align: middle;
     position: relative;
 
     :active {
