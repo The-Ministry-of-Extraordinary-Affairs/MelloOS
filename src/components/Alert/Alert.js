@@ -5,6 +5,8 @@ import Button from "../Button/Button";
 import Select from "../Select/Select";
 import CheckBox from "../CheckBox/CheckBox";
 import Radio from "../Radio/Radio";
+import TextInput from "../TextInput/TextInput";
+import TextArea from "../TextInput/TextArea";
 
 const StyledAlert = styled(Base)`
     ${fontBuilder("primary", 4)}
@@ -24,10 +26,10 @@ const Alert = ({
             titleBar={false}
             statusBar={false}
             scrollBars={false}
-            height={300}
+            height={350}
             width={400}
             top={200}
-            left={0}
+            left={50}
             inset={true}
             { ...props }
         >
@@ -56,6 +58,14 @@ const Alert = ({
                 <hr />
                 <Base>
                 <Radio name='hi' />on<Radio name='hi' cross />off
+                </Base>
+                <hr />
+                <Base>
+                <TextInput />
+                </Base>
+                <hr />
+                <Base>
+                <TextArea />
                 </Base>
                 <hr />
                 <Base>
