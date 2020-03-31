@@ -7,6 +7,7 @@ import CheckBox from "../CheckBox/CheckBox";
 import Radio from "../Radio/Radio";
 import TextInput from "../TextInput/TextInput";
 import TextArea from "../TextInput/TextArea";
+import Line from "../Line/Line";
 
 const StyledAlert = styled(Base)`
     ${fontBuilder("primary", 4)}
@@ -51,23 +52,23 @@ const Alert = ({
                     <option>ends with</option>
                 </Select>
                 </Base>
-                <hr />
+                <Line />
                 <Base>
                 <CheckBox />all at once
                 </Base>
-                <hr />
+                <Line />
                 <Base>
                 <Radio name='hi' />on<Radio name='hi' cross />off
                 </Base>
-                <hr />
+                <Line />
                 <Base>
                 <TextInput />
                 </Base>
-                <hr />
+                <Line />
                 <Base>
                 <TextArea />
                 </Base>
-                <hr />
+                <Line />
                 <Base>
                 <Button onClick={close} >Cancel</Button><Button onClick={close} primary>Find</Button>
                 </Base>
