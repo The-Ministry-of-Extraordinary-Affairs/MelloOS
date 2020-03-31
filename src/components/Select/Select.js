@@ -14,6 +14,8 @@ const StyledSelect = styled.select`
     border-radius: 0;
 
     min-width: 150px;
+    padding-left: 16px;
+    padding-right: 32px;
 
     background-image: url("data:image/svg+xml,<svg width='24' height='24' xmlns='http://www.w3.org/2000/svg'><path d='m0,6l12,12l12,-12l-24,0z'/><path fill='none' d='m0,0l24,0l0,24l-24,0l0,-24z'/></svg>");
     background-repeat: no-repeat;
@@ -23,17 +25,6 @@ const StyledSelect = styled.select`
     ::after {
         background-color: white;
     }
-`
-
-const StyledOption = styled.option`
-    appearance: none;
-    ${ baseBuilder }
-    ${ borderBuilder("all", "default") }
-    ${ fontBuilder() }
-
-    height: ${({theme}) => theme.sizes.select };
-    box-shadow: ${({theme}) => theme.shadows.select };
-    border-radius: 0;
 `
 
 class Select extends Component {
@@ -49,8 +40,7 @@ class Select extends Component {
             <StyledSelect
                 { ...props }
             >
-                <StyledOption>Option 1</StyledOption>
-                <StyledOption>Option 2</StyledOption>
+                { children }
             </StyledSelect>
         )
     }
