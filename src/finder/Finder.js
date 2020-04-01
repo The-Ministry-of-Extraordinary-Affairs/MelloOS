@@ -9,6 +9,8 @@ import Window from '../components/Window/Window';
 import Icon from '../components/Icon/Icon';
 import Clock from '../applications/Clock/Clock'
 
+import { WindowProvider, WindowAPI, WindowManager } from './WindowManager';
+
 /*
 
     The Finder is the main UI manager.
@@ -46,25 +48,6 @@ class Finder extends Component {
         alert(`hiding ${app}: hiding all windows.`)
     }
 
-    openWindow(title) {
-        alert(`opening new window with title: ${title}`)
-
-        let window = { title }
-        window.id = this.state.currentWID
-        this.setState({
-            openWindows: [...this.state.openWindows, window ],
-            currentWID: this.state.currentWID + 1,
-        })
-    }
-
-    closeWindow(wid) {
-        alert(`closing window with Winodw ID: ${wid}`)
-    }
-
-    focusWindow(wid) {
-        alert(`bringing forward window with Window ID: ${wid}`)
-    }
-
     render(){
         const {
             theme,
@@ -73,35 +56,34 @@ class Finder extends Component {
         } = this.state;
         return(
             <ThemeProvider theme={theme}>
-                <main>
-                    <Desktop>
-                        <Icon
-                            src="../data/img/se.svg"
-                            label="MelloOS"
-                            actionHandler={this.openApp}
+            <WindowProvider>
+                <WindowAPI>
+                    { windowAPI => (
+                        <main>
+                            <Desktop>
+                                <Icon
+                                    src="../data/img/se.svg"
+                                    label="MelloOS"
+                                    actionHandler={ () => windowAPI.openWindow("../data/img/se.svg")}
+                                    />
+                                <Icon
+                                    src="../data/img/trash.svg"
+                                    label="Trash"
+                                    top={window.innerHeight - 100}
+                                    actionHandler={this.openApp}
+                                />
+                            </Desktop>
+                            <MenuBar
+                                appMenu={finderMenu}
+                                osMenu={osMenu}
+                                statusMenu={[<Clock />]}
+                                actionHandler={this.openApp}
                             />
-                        <Icon
-                            src="../data/img/trash.svg"
-                            label="Trash"
-                            top={window.innerHeight - 100}
-                            actionHandler={this.openApp}
-                        />
-                    </Desktop>
-                    <MenuBar
-                        appMenu={finderMenu}
-                        osMenu={osMenu}
-                        statusMenu={[<Clock />]}
-                        actionHandler={this.openApp}
-                    />
-                    { this.state.openWindows.map(window => <Window
-                        id={window.id}
-                        title={window.title}
-                        titleBar
-                        statusBar
-                        scrollBars
-                        closeHandler={this.closeWindow}
-                    >{ window.content && window.content }</Window>) }
-                </main>
+                            <WindowManager />
+                        </main>
+                    )}
+                </WindowAPI>
+            </WindowProvider>
             </ThemeProvider>
         )
     }

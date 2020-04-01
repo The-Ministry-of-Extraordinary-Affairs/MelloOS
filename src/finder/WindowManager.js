@@ -1,50 +1,87 @@
-import { Component } from "preact";
+import {createContext, Component} from 'preact'
 
-import Alert from '../components/Alert/Alert';
-import Window from '../components/Window/Window';
+export const WindowContext = createContext();
+export const WindowAPI = WindowContext.Consumer;
 
-class WindowManager extends Component {
+import Window from '../components/Window/Window'
+
+export class WindowProvider extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            windows: [
-                {title: 'haj', id:1000, content:"bakkes"},
-                {title: 'dikke', id:2000},
-                {title: 'papzak', id:3000},
-            ]
+            currentWindow: false,
+            openWindows: [{ name:"kip", id:"100"}],
+            currentWID: 101
         }
     }
 
-    componentDidMount() {
-        this.openWindow();
-    }
-
     openWindow = (title) => {
+        // alert(`opening new window with title: ${title}`)
+        console.log(this.state)
+
         let window = { title }
-        window.id = Math.random().toString(16).substr(2,8)
-        this.setState({ windows: [...this.state.windows, window ]})
+        window.id = this.state.currentWID
+        this.setState({
+            openWindows: [...this.state.openWindows, window ],
+            currentWID: this.state.currentWID + 1,
+        })
     }
 
-    closeWindow = (id) => {
-        let windows = this.state.windows.filter(window => window.id !== id);
-        this.setState({ windows });
+    closeWindow = (wid) => {
+        alert(`closing window with Winodw ID: ${wid}`)
+        let openWindows = this.state.openWindows.filter(window => window.id !== wid);
+        this.setState({ openWindows });
     }
 
-    render(props) {
-        return (
-            <>
-            { this.state.windows.map(window => <Window
-                id={window.id}
-                title={window.title}
-                titleBar
-                statusBar
-                scrollBars
-                closeHandler={this.closeWindow}
-                {...props}
-            >{ window.content && window.content }</Window>) }
-            </>
+    focusWindow = (wid) => {
+        alert(`bringing forward window with Window ID: ${wid}`)
+    }
+
+    render({
+        children,
+        ...props
+    }) {
+        return(
+            <WindowContext.Provider
+                value={{
+                    ...this.state,
+                    openWindow: this.openWindow,
+                    closeWindow: this.closeWindow,
+                    focusWindow: this.focusWindow
+                }}
+            >
+                { children }
+            </WindowContext.Provider>
         )
     }
 }
 
-export default WindowManager
+export class WindowManager extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+
+    render({
+        children,
+        ...props
+    }) {
+        return(
+            <WindowAPI>
+                { windowAPI => (
+                    windowAPI.openWindows.map(window => <Window
+                            id={window.id}
+                            title={window.title}
+                            titleBar
+                            statusBar
+                            scrollBars
+                            closeHandler={() => windowAPI.closeWindow(window.id)}
+                            >
+                                { window.content && window.content }
+                            </Window>
+                    )
+                )}
+            </WindowAPI>
+        )
+    }
+}
