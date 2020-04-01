@@ -69,6 +69,10 @@ class Window extends Component {
                 x: 0,
                 y: 0,
             },
+            scroll: {
+                vertical: 0,
+                horizontal: 0,
+            }
         }
     }
 
@@ -77,9 +81,16 @@ class Window extends Component {
     }
 
     scroll = (e) => {
-        let loc = e.target.scrollTop
-        let tot = e.target.scrollHeight - e.target.clientHeight
-        console.log("scrolled: ", loc / tot * 100)
+        let locV = e.target.scrollTop
+        let totV = e.target.scrollHeight - e.target.clientHeight
+        let locH = e.target.scrollLeft
+        let totH = e.target.scrollWidth - e.target.clientWidth
+        this.setState({
+            scroll:{
+                horizontal: locH / totH,
+                vertical: locV / totV
+            }
+        })
     }
 
     componentDidUpdate = (props, state) => {
@@ -185,7 +196,7 @@ class Window extends Component {
         children,
         ...props
     }) {
-        const { id, titleBar, statusBar, scrollBars, inset, position, size, offset, resizing, maximised, title } = this.state
+        const { id, titleBar, statusBar, scrollBars, inset, position, size, offset, scroll, resizing, maximised, title } = this.state
         return (
             <>
             <StyledOuterWindow
@@ -217,8 +228,8 @@ class Window extends Component {
                     { children }
                 </InnerWindow>
                 { scrollBars && <>
-                        <VerticalScrollBar />
-                        <HorizontalScrollBar />
+                        <VerticalScrollBar scroll={ scroll.vertical } />
+                        <HorizontalScrollBar scroll={ scroll.horizontal } />
                         <SizeBox resizeHandler={this.startResize} />
                     </>
                 }

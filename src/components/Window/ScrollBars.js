@@ -18,6 +18,7 @@ const StyledHorizontalScrollBar = styled(Base)`
 
 const StyledScrollBar = styled(Base)`
     ${flexBuilder("row", 1, 0)}
+    position: relative;
 `
 
 const StyledSizeBox = styled(Box)`
@@ -28,7 +29,7 @@ const StyledSizeBox = styled(Box)`
     grid-area: sizebox
 `
 
-const StyledScrollBox = styled(Box)`
+const StyledScrollArrow = styled(Box)`
     transform: rotate(${({rot}) => rot});
     width: 24px;
     height: 24px;
@@ -36,22 +37,37 @@ const StyledScrollBox = styled(Box)`
     ${ borderBuilder("b", "default") }
 `
 
-export const VerticalScrollBar = () => {
+const StyledScrollBox = styled(Box).attrs(({horizontal, vertical, scroll}) => ({
+    style: {
+        top: `${vertical ? `calc((100% - 24px) * ${scroll})` : 0}`,
+        left: `${horizontal ? `calc((100% - 24px) * ${scroll})` : 0}`
+    }
+}))`
+    position: absolute;
+    width: 24px;
+    height: 24px;
+`
+
+export const VerticalScrollBar = ({scroll}) => {
     return(
         <StyledVerticalScrollBar>
-            <StyledScrollBox rot={'0deg'} />
-            <StyledScrollBar />
-            <StyledScrollBox rot={'180deg'} />
+            <StyledScrollArrow rot={'0deg'} />
+            <StyledScrollBar>
+                <StyledScrollBox vertical scroll={scroll} />
+            </StyledScrollBar>
+            <StyledScrollArrow rot={'180deg'} />
         </StyledVerticalScrollBar>
     )
 }
 
-export const HorizontalScrollBar = () => {
+export const HorizontalScrollBar = ({scroll}) => {
     return(
         <StyledHorizontalScrollBar>
-            <StyledScrollBox rot={'270deg'} />
-            <StyledScrollBar />
-            <StyledScrollBox rot={'90deg'} />
+            <StyledScrollArrow rot={'270deg'} />
+            <StyledScrollBar>
+                <StyledScrollBox horizontal scroll={scroll} />
+            </StyledScrollBar>
+            <StyledScrollArrow rot={'90deg'} />
         </StyledHorizontalScrollBar>
     )
 }

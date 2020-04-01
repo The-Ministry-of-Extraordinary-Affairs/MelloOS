@@ -14,10 +14,6 @@ const StyledInset = styled(Base)`
     overflow: scroll;
 `
 
-const lg = () => {
-    console.log("scroll action baby")
-}
-
 const InnerWindow = ({
     children,
     inset,
@@ -31,7 +27,7 @@ const InnerWindow = ({
             onScroll={inset ? undefined : scrollHandler}
             {...props }
         >
-            { inset ? <StyledInset closeHandler={closeHandler} onScroll={inset ? scrollHandler : undefined} > { children } </StyledInset> : <> { children } </> }
+            { inset ? <StyledInset closeHandler={closeHandler} onScroll={inset ? scrollHandler : undefined} > { children } </StyledInset> : <> { children } <p>blablblablablablablaablablabalbalablablablablabalbalablablabalbalablablabl</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p> </> }
         </StyledInnerWindow>
     )
 }
