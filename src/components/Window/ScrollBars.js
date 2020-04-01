@@ -39,8 +39,8 @@ const StyledScrollArrow = styled(Box)`
 
 const StyledScrollBox = styled(Box).attrs(({horizontal, vertical, scroll}) => ({
     style: {
-        top: `${vertical ? `calc((100% - 24px) * ${scroll})` : 0}`,
-        left: `${horizontal ? `calc((100% - 24px) * ${scroll})` : 0}`
+        top: `${vertical ? `calc((100% - 24px) * ${scroll})` : "0"}`,
+        left: `${horizontal ? `calc((100% - 24px) * ${scroll})` : "0"}`
     }
 }))`
     position: absolute;
