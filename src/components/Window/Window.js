@@ -76,6 +76,12 @@ class Window extends Component {
         this.state.closeHandler(this.state.id)
     }
 
+    scroll = (e) => {
+        let loc = e.target.scrollTop
+        let tot = e.target.scrollHeight - e.target.clientHeight
+        console.log("scrolled: ", loc / tot * 100)
+    }
+
     componentDidUpdate = (props, state) => {
         if (this.state.dragging && !state.dragging) {
             document.addEventListener('mousemove', this.drag)
@@ -204,6 +210,7 @@ class Window extends Component {
                     resizeHandler={this.startResize}
                     closeHandler={this.close}
                     maximiseHandler={this.maximise}
+                    scrollHandler={this.scroll}
                     inset={inset}
                     { ...props }
                 >
