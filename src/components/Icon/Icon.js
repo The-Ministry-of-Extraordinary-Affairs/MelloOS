@@ -85,7 +85,7 @@ class Icon extends Component {
 
         console.log(Date.now() - this.state.dragStart)
 
-        if (Date.now() - this.state.dragStart < 200) { console.log("should be doing smth"); this.actionHandler() }
+        if (Date.now() - this.state.dragStart < 200) { this.actionHandler() }
         e.stopPropagation()
         e.preventDefault()
     }
