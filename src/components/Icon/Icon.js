@@ -37,7 +37,9 @@ class Icon extends Component {
                 left: props.left || window.innerWidth - 80,
                 top: props.top || 50,
             },
+            dragStart: null
         }
+        this.actionHandler = props.actionHandler
     }
 
     componentDidUpdate = (props, state) => {
@@ -55,13 +57,13 @@ class Icon extends Component {
     }
 
     startDrag = (e) => {
-        if(this.state.maximised) return
         this.setState({
             dragging: true,
             offset: {
                 x: e.pageX - this.state.position.left,
                 y: e.pageY - this.state.position.top
-            }
+            },
+            dragStart: Date.now()
         })
         e.stopPropagation()
         e.preventDefault()
@@ -80,14 +82,19 @@ class Icon extends Component {
 
     endDrag = (e) => {
         this.setState({ dragging: false })
+
+        console.log(Date.now() - this.state.dragStart)
+
+        if (Date.now() - this.state.dragStart < 200) { console.log("should be doing smth"); this.actionHandler() }
         e.stopPropagation()
         e.preventDefault()
     }
 
     render({
-        children,
         label,
         src,
+        actionHandler,
+        children,
         ...props
     }) {
         const { position } = this.state;
@@ -95,7 +102,7 @@ class Icon extends Component {
             <StyledIcon
                 position = {position}
                 {...props }
-            >
+                >
                 <StyledImage
                     onMouseDown={this.startDrag}
                     onTouchStart={this.startDrag}

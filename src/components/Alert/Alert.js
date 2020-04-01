@@ -38,40 +38,6 @@ const Alert = ({
                 { ...props }
             >
                 { children }
-                <Base>Find and select items whose</Base>
-                <Base>
-                <Select>
-                    <option>name</option>
-                    <option>size</option>
-                    <option>kind</option>
-                    <option>label</option>
-                </Select>
-                <Select>
-                    <option>contains</option>
-                    <option>starts with</option>
-                    <option>ends with</option>
-                </Select>
-                </Base>
-                <Line />
-                <Base>
-                <CheckBox />all at once
-                </Base>
-                <Line />
-                <Base>
-                <Radio name='hi' />on<Radio name='hi' cross />off
-                </Base>
-                <Line />
-                <Base>
-                <TextInput />
-                </Base>
-                <Line />
-                <Base>
-                <TextArea />
-                </Base>
-                <Line />
-                <Base>
-                <Button onClick={close} >Cancel</Button><Button onClick={close} primary>Find</Button>
-                </Base>
             </StyledAlert>
         </Window>
     )

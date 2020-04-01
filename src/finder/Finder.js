@@ -5,7 +5,6 @@ import MenuBar from '../components/MenuBar/MenuBar'
 import Desktop from '../components/Desktop/Desktop';
 
 import Window from '../components/Window/Window';
-import Alert from '../components/Alert/Alert';
 
 import Icon from '../components/Icon/Icon';
 import Clock from '../applications/Clock/Clock'
@@ -26,14 +25,8 @@ class Finder extends Component {
             osMenu: props.osMenu,
             installedApplications: props.installedApplications,
             currentPID: 0,
-            currentApplication: undefined,
-            openApplications: [],
-            currentWID: 0,
             currentWindow: undefined,
-            openWindows: [
-                {title: 'haj', id:1000, content:"bakkes"},
-                {title: 'dikke', id:2000},
-            ],
+            openWindows: [],
         }
     }
 
@@ -85,11 +78,13 @@ class Finder extends Component {
                         <Icon
                             src="../data/img/se.svg"
                             label="MelloOS"
-                        />
+                            actionHandler={this.openApp}
+                            />
                         <Icon
                             src="../data/img/trash.svg"
                             label="Trash"
                             top={window.innerHeight - 100}
+                            actionHandler={this.openApp}
                         />
                     </Desktop>
                     <MenuBar
@@ -106,7 +101,6 @@ class Finder extends Component {
                         scrollBars
                         closeHandler={this.closeWindow}
                     >{ window.content && window.content }</Window>) }
-                    <Alert id={3} closeHandler={this.closeWindow} >Pretty cool this!</Alert>
                 </main>
             </ThemeProvider>
         )
