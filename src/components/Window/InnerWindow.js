@@ -27,7 +27,7 @@ const InnerWindow = ({
             onScroll={inset ? undefined : scrollHandler}
             {...props }
         >
-            { inset ? <StyledInset closeHandler={closeHandler} onScroll={inset ? scrollHandler : undefined} > { children } </StyledInset> : <> { children } <p>blablblablablablablaablablabalbalablablablablabalbalablablabalbalablablabl</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p><p>blablbla</p> </> }
+            { inset ? <StyledInset closeHandler={closeHandler} onScroll={inset ? scrollHandler : undefined} > { children } </StyledInset> : <> { children } </> }
         </StyledInnerWindow>
     )
 }
