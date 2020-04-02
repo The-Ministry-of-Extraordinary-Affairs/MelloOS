@@ -134,12 +134,14 @@ class Window extends Component {
     }
 
     drag = (e) => {
+        let position = {
+            left: e.pageX - this.state.offset.x,
+            top: e.pageY - this.state.offset.y,
+        }
         this.setState({
-            position: {
-                left: e.pageX - this.state.offset.x,
-                top: e.pageY - this.state.offset.y,
-            }
+            position
         })
+        this.props.moveHandler(this.state.id, position)
         e.stopPropagation()
         e.preventDefault()
     }

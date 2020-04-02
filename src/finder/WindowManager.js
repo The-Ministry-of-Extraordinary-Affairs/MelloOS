@@ -23,6 +23,7 @@ export class WindowProvider extends Component {
         window.content = window.id
         window.size = { width: 640, height: 480 }
         window.position = { left: 100, top: 100 }
+        window.maximised = false
         this.setState({
             openWindows: [...this.state.openWindows, window ],
             currentWID: this.state.currentWID + 1,
@@ -51,7 +52,11 @@ export class WindowProvider extends Component {
     }
 
     moveWindow = (wid, position) => {
-        console.log("moving window in parent state")
+        console.log("moveing window: ", wid, " to ", position)
+        let openWindows = [...this.state.openWindows]
+        let index = openWindows.findIndex(window => window.id === wid)
+        openWindows[index].position = position
+        this.setState({ openWindows })
     }
 
     render({
