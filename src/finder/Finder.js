@@ -7,7 +7,8 @@ import Desktop from '../components/Desktop/Desktop';
 import Icon from '../components/Icon/Icon';
 import Clock from '../applications/Clock/Clock'
 
-import { WindowProvider, WindowAPI, WindowManager } from './WindowManager';
+import { WindowProvider, WindowManager } from './WindowManager';
+import { ApplicationProvider, AppAPI } from './ApplicationManager';
 
 /*
 
@@ -30,22 +31,6 @@ class Finder extends Component {
         }
     }
 
-    openApp(app, location) {
-        alert(`opening ${location} using ${app}`)
-    }
-
-    quitApp(app) {
-        alert(`quitting ${app}: closing all windows.`)
-    }
-
-    focusApp(app) {
-        alert(`focusing ${app}: bringing forward all windows.`)
-    }
-
-    hideApp(app) {
-        alert(`hiding ${app}: hiding all windows.`)
-    }
-
     render(){
         const {
             theme,
@@ -55,14 +40,17 @@ class Finder extends Component {
         return(
             <ThemeProvider theme={theme}>
             <WindowProvider>
-                <WindowAPI>
-                    { windowAPI => (
+            <ApplicationProvider
+                installedApplications={this.state.installedApplications}
+            >
+                <AppAPI>
+                    { appAPI => (
                         <main>
                             <Desktop>
                                 <Icon
                                     src="../data/img/se.svg"
                                     label="MelloOS"
-                                    actionHandler={ () => windowAPI.openWindow("../data/img/se.svg")}
+                                    actionHandler={ () => appAPI.openApp("../data/img/se.svg")}
                                     />
                                 <Icon
                                     src="../data/img/trash.svg"
@@ -75,12 +63,13 @@ class Finder extends Component {
                                 appMenu={finderMenu}
                                 osMenu={osMenu}
                                 statusMenu={[<Clock />]}
-                                actionHandler={this.openApp}
+                                actionHandler={appAPI.openApp}
                             />
                             <WindowManager />
                         </main>
                     )}
-                </WindowAPI>
+                </AppAPI>
+            </ApplicationProvider>
             </WindowProvider>
             </ThemeProvider>
         )
