@@ -95,6 +95,7 @@ export class WindowManager extends Component {
             <WindowAPI>
                 { windowAPI => (
                     windowAPI.openWindows.map(window => <Window
+                            key={window.id}
                             id={window.id}
                             title={window.title}
                             titleBar
