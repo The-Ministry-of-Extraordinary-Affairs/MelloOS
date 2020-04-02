@@ -4,6 +4,7 @@ import DropDown from "../../components/MenuBar/DropDown";
 // import windowmanager ??
 
 class Clock extends Component {
+    static displayName = "clock"
     constructor(props) {
         super(props);
         this.state = {
@@ -11,6 +12,7 @@ class Clock extends Component {
             open: false
         }
     }
+
 
     open = () => {
         this.setState({open:true})

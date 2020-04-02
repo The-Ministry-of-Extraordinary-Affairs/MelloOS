@@ -24,7 +24,6 @@ class Finder extends Component {
             theme: props.theme,
             finderMenu: props.finderMenu,
             osMenu: props.osMenu,
-            installedApplications: props.installedApplications,
             currentPID: 0,
             currentWindow: undefined,
             openWindows: [],
@@ -35,14 +34,13 @@ class Finder extends Component {
         const {
             theme,
             finderMenu,
-            osMenu
+            osMenu,
+            installedApplications,
         } = this.state;
         return(
             <ThemeProvider theme={theme}>
             <WindowProvider>
-            <ApplicationProvider
-                installedApplications={this.state.installedApplications}
-            >
+            <ApplicationProvider>
                 <AppAPI>
                     { appAPI => (
                         <main>
@@ -56,7 +54,7 @@ class Finder extends Component {
                                     src="../data/img/trash.svg"
                                     label="Trash"
                                     top={window.innerHeight - 100}
-                                    actionHandler={this.openApp}
+                                    actionHandler={ () => appAPI.openApp("clock", "../data/img/se.svg")}
                                 />
                             </Desktop>
                             <MenuBar

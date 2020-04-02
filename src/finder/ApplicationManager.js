@@ -4,18 +4,26 @@ import { WindowContext, WindowAPI } from './WindowManager'
 export const AppContext = createContext();
 export const AppAPI = AppContext.Consumer;
 
+import * as Applications from '../applications/Applications'
+
 export class ApplicationProvider extends Component {
     constructor(props) {
         super(props);
+        console.log(Applications)
         this.state = {
-            installedApps: props.installedApps,
+            installedApplications: Applications,
             currentApp: false,
             openApps: [],
         }
     }
 
     openApp = (app, location) => {
+        for (let application in Applications) {
+            console.log("dn: ",Applications[application].displayName)
+            }
+
         let windowAPI = this.context
+        console.log(this.state.installedApplications)
         console.log(`opening ${location} using ${app}`)
         windowAPI.openWindow("app")
     }
