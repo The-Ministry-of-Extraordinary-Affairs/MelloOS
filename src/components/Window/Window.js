@@ -49,6 +49,8 @@ class Window extends Component {
         this.state = {
             id: props.id,
             closeHandler: props.closeHandler,
+            resizeHandler: props.resizeHandler,
+            moveHandler: props.moveHandler,
             titleBar: props.titleBar,
             statusBar: props.statusBar,
             scrollBars: props.scrollBars,
@@ -143,7 +145,9 @@ class Window extends Component {
     }
 
     endDrag = (e) => {
+        console.log(this.state)
         this.setState({ dragging: false })
+        this.state.moveHandler(this.id, this.state.position)
         e.stopPropagation()
         e.preventDefault()
     }
@@ -177,6 +181,7 @@ class Window extends Component {
                 height: this.state.offset.y - this.state.position.top
             }
         })
+        this.state.resizeHandler(this.id, this.state.size)
         e.stopPropagation()
         e.preventDefault()
     }

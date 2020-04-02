@@ -10,17 +10,19 @@ export class WindowProvider extends Component {
         super(props);
         this.state = {
             currentWindow: false,
-            openWindows: [{ name:"kip", id:"100"}],
-            currentWID: 101
+            openWindows: [],
+            currentWID:100,
         }
     }
 
     openWindow = (title) => {
-        // alert(`opening new window with title: ${title}`)
-        console.log(this.state)
+        console.log(`opening new window with title: ${title}`)
 
         let window = { title }
         window.id = this.state.currentWID
+        window.content = window.id
+        window.size = { width: 100, height: 100 }
+        window.position = { left: 100, top: 100 }
         this.setState({
             openWindows: [...this.state.openWindows, window ],
             currentWID: this.state.currentWID + 1,
@@ -28,13 +30,36 @@ export class WindowProvider extends Component {
     }
 
     closeWindow = (wid) => {
-        alert(`closing window with Winodw ID: ${wid}`)
+        console.log(`closing window with Window ID: ${wid}`)
+
         let openWindows = this.state.openWindows.filter(window => window.id !== wid);
         this.setState({ openWindows });
+        console.log(openWindows)
     }
 
     focusWindow = (wid) => {
         alert(`bringing forward window with Window ID: ${wid}`)
+    }
+
+    resizeWindow = (wid, size) => {
+        console.log('resized')
+        this.setState(state => {
+            const openWindows = state.openWindows.map(window => {
+                window.wid === wid ? window.size = size : null;
+                return window
+            })
+            return openWindows
+        })
+    }
+
+    moveWindow = (wid, position) => {
+        this.setState(state => {
+            const openWindows = state.openWindows.map(window => {
+                window.wid === wid ? window.position = position : null;
+                return window
+            })
+            return openWindows
+        })
     }
 
     render({
@@ -75,6 +100,8 @@ export class WindowManager extends Component {
                             titleBar
                             statusBar
                             scrollBars
+                            resizeHandler={() => windowAPI.resizeWindow}
+                            moveHandler={() => windowAPI.moveWindow}
                             closeHandler={() => windowAPI.closeWindow(window.id)}
                             >
                                 { window.content && window.content }

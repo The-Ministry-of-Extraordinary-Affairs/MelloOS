@@ -4,8 +4,6 @@ import { ThemeProvider } from 'styled-components';
 import MenuBar from '../components/MenuBar/MenuBar'
 import Desktop from '../components/Desktop/Desktop';
 
-import Window from '../components/Window/Window';
-
 import Icon from '../components/Icon/Icon';
 import Clock from '../applications/Clock/Clock'
 

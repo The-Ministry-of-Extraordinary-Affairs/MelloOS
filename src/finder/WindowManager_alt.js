@@ -40,6 +40,8 @@ class WindowManager extends Component {
                 statusBar
                 scrollBars
                 closeHandler={this.closeWindow}
+                left={20}
+                top={20}
                 {...props}
             >{ window.content && window.content }</Window>) }
             </>
