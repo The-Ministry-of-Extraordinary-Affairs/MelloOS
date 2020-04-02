@@ -21,7 +21,7 @@ export class WindowProvider extends Component {
         let window = { title }
         window.id = this.state.currentWID
         window.content = window.id
-        window.size = { width: 100, height: 100 }
+        window.size = { width: 640, height: 480 }
         window.position = { left: 100, top: 100 }
         this.setState({
             openWindows: [...this.state.openWindows, window ],
@@ -42,24 +42,16 @@ export class WindowProvider extends Component {
     }
 
     resizeWindow = (wid, size) => {
-        console.log('resized')
-        this.setState(state => {
-            const openWindows = state.openWindows.map(window => {
-                window.wid === wid ? window.size = size : null;
-                return window
-            })
-            return openWindows
-        })
+        console.log("sizing window: ", wid, " to ", size)
+        let openWindows = [...this.state.openWindows]
+        let index = openWindows.findIndex(window => window.id === wid)
+        openWindows[index].size = size
+        this.setState({ openWindows })
+
     }
 
     moveWindow = (wid, position) => {
-        this.setState(state => {
-            const openWindows = state.openWindows.map(window => {
-                window.wid === wid ? window.position = position : null;
-                return window
-            })
-            return openWindows
-        })
+        console.log("moving window in parent state")
     }
 
     render({
@@ -72,7 +64,9 @@ export class WindowProvider extends Component {
                     ...this.state,
                     openWindow: this.openWindow,
                     closeWindow: this.closeWindow,
-                    focusWindow: this.focusWindow
+                    focusWindow: this.focusWindow,
+                    resizeWindow: this.resizeWindow,
+                    moveWindow: this.moveWindow,
                 }}
                 {...props}
             >
@@ -101,9 +95,11 @@ export class WindowManager extends Component {
                             titleBar
                             statusBar
                             scrollBars
-                            resizeHandler={() => windowAPI.resizeWindow}
-                            moveHandler={() => windowAPI.moveWindow}
+                            resizeHandler={(wid, size) => windowAPI.resizeWindow(wid, size)}
+                            moveHandler={(wid, position) => windowAPI.moveWindow(wid, position)}
                             closeHandler={() => windowAPI.closeWindow(window.id)}
+                            size={window.size}
+                            position={window.position}
                             {...props}
                             >
                                 { window.content && window.content }

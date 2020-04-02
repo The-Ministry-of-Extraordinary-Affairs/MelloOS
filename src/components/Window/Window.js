@@ -59,13 +59,13 @@ class Window extends Component {
             dragging: false,
             resizing: false,
             maximised: props.maximised || false,
-            size: {
-                width: props.width || 640,
-                height: props.height || 480,
+            size: props.size || {
+                width: 640,
+                height:  480,
             },
             position: {
-                left: props.left || 100,
-                top: props.top || 100,
+                left: 100,
+                top: 100,
             },
             offset: {
                 x: 0,
@@ -145,16 +145,13 @@ class Window extends Component {
     }
 
     endDrag = (e) => {
-        console.log(this.state)
         this.setState({ dragging: false })
-        this.state.moveHandler(this.id, this.state.position)
         e.stopPropagation()
         e.preventDefault()
     }
 
     startResize = (e) => {
         if(this.state.maximised) return
-        console.log('go')
         this.setState({
             resizing: true,
         })
@@ -174,14 +171,15 @@ class Window extends Component {
     }
 
     endResize = (e) => {
+        let size = {
+            width: this.state.offset.x - this.state.position.left,
+            height: this.state.offset.y - this.state.position.top
+        }
         this.setState({
             resizing: false,
-            size: {
-                width: this.state.offset.x - this.state.position.left,
-                height: this.state.offset.y - this.state.position.top
-            }
+            size
         })
-        this.state.resizeHandler(this.id, this.state.size)
+        this.props.resizeHandler(this.state.id, size)
         e.stopPropagation()
         e.preventDefault()
     }
