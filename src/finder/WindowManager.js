@@ -74,6 +74,7 @@ export class WindowProvider extends Component {
                     closeWindow: this.closeWindow,
                     focusWindow: this.focusWindow
                 }}
+                {...props}
             >
                 { children }
             </WindowContext.Provider>
@@ -103,6 +104,7 @@ export class WindowManager extends Component {
                             resizeHandler={() => windowAPI.resizeWindow}
                             moveHandler={() => windowAPI.moveWindow}
                             closeHandler={() => windowAPI.closeWindow(window.id)}
+                            {...props}
                             >
                                 { window.content && window.content }
                             </Window>

@@ -1,4 +1,4 @@
-import { Component, h } from 'preact';
+import { Component } from 'preact';
 import { ThemeProvider } from 'styled-components';
 
 import MenuBar from '../components/MenuBar/MenuBar'
@@ -35,7 +35,6 @@ class Finder extends Component {
             theme,
             finderMenu,
             osMenu,
-            installedApplications,
         } = this.state;
         return(
             <ThemeProvider theme={theme}>

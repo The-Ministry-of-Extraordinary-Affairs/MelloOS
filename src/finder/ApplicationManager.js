@@ -1,5 +1,5 @@
 import {createContext, Component} from 'preact'
-import { WindowContext, WindowAPI } from './WindowManager'
+import { WindowContext } from './WindowManager'
 
 export const AppContext = createContext();
 export const AppAPI = AppContext.Consumer;
@@ -29,17 +29,17 @@ export class ApplicationProvider extends Component {
     }
 
     quitApp = (app) => {
-        let windowAPI = this.context
+        // let windowAPI = this.context
         console.log(`quitting ${app}: closing all windows.`)
     }
 
     focusApp = (app) => {
-        let windowAPI = this.context
+        // let windowAPI = this.context
         console.log(`focusing ${app}: bringing forward all windows.`)
     }
 
     hideApp = (app) => {
-        let windowAPI = this.context
+        // let windowAPI = this.context
         console.log(`hiding ${app}: hiding all windows.`)
     }
 
@@ -56,6 +56,7 @@ export class ApplicationProvider extends Component {
                     focusApp: this.focusApp,
                     hideApp: this.hideApp
                 }}
+                {...props}
             >
             { children }
         </AppContext.Provider>
