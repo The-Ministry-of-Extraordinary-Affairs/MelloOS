@@ -9,12 +9,13 @@ import { VerticalScrollBar, HorizontalScrollBar, SizeBox } from './ScrollBars';
 
 import Ghost from "./Ghost";
 
-const StyledOuterWindow = styled(Base).attrs(({position, size, maximised}) => ({
+const StyledOuterWindow = styled(Base).attrs(({position, size, maximised, zIndex}) => ({
     style: {
         top: `${maximised ? 32 : position.top}px`,
         left: `${maximised ? 0 : position.left}px`,
         width: `${maximised ? window.innerWidth : size.width}px`,
-        height: `${maximised ? window.innerHeight - 32 : size.height}px`
+        height: `${maximised ? window.innerHeight - 32 : size.height}px`,
+        zIndex
     }
 }))`
     display: grid;
@@ -41,6 +42,7 @@ const StyledResizeGhost = styled(Ghost).attrs(({position, offset}) => ({
     }
 }))`
     position: absolute;
+    z-index: 1000000
 `
 
 class Window extends Component {
@@ -48,9 +50,11 @@ class Window extends Component {
         super(props)
         this.state = {
             id: props.id,
+            zIndex: props.zIndex,
             closeHandler: props.closeHandler,
             resizeHandler: props.resizeHandler,
             moveHandler: props.moveHandler,
+            focusHandler: props.focusHandler,
             titleBar: props.titleBar,
             statusBar: props.statusBar,
             scrollBars: props.scrollBars,
@@ -76,6 +80,11 @@ class Window extends Component {
                 horizontal: 0,
             }
         }
+    }
+
+    focus = () => {
+        console.log("focusing")
+        this.props.focusHandler(this.state.id)
     }
 
     close = () => {
@@ -129,7 +138,6 @@ class Window extends Component {
                 y: e.pageY - this.state.position.top
             }
         })
-        e.stopPropagation()
         e.preventDefault()
     }
 
@@ -157,7 +165,6 @@ class Window extends Component {
         this.setState({
             resizing: true,
         })
-        e.stopPropagation()
         e.preventDefault()
     }
 
@@ -201,7 +208,7 @@ class Window extends Component {
         children,
         ...props
     }) {
-        const { id, titleBar, statusBar, scrollBars, inset, position, size, offset, scroll, resizing, maximised, title } = this.state
+        const { id, titleBar, statusBar, scrollBars, inset, position, size, offset, scroll, resizing, maximised, title, zIndex } = this.state
         return (
             <>
             <StyledOuterWindow
@@ -212,6 +219,9 @@ class Window extends Component {
                 position={ position }
                 size={ size }
                 maximised={ maximised }
+                zIndex={ zIndex }
+                onMouseDown={ this.focus }
+                onTouchStart={ this.focus }
                 { ...props }
             >
                 { titleBar && <TitleBar

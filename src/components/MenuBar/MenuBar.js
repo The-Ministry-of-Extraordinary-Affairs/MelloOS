@@ -10,6 +10,7 @@ import Menu from './Menu'
 */
 
 const StyledMenuBar = styled(Base)`
+    z-index: 1000000;
     position: fixed;
     top: 0;
     left: 0;

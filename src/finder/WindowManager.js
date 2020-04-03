@@ -24,6 +24,7 @@ export class WindowProvider extends Component {
         window.size = { width: 640, height: 480 }
         window.position = { left: 100, top: 100 }
         window.maximised = false
+        window.zIndex = window.id
         this.setState({
             openWindows: [...this.state.openWindows, window ],
             currentWID: this.state.currentWID + 1,
@@ -39,7 +40,13 @@ export class WindowProvider extends Component {
     }
 
     focusWindow = (wid) => {
-        alert(`bringing forward window with Window ID: ${wid}`)
+        let openWindows = [...this.state.openWindows]
+        let index = openWindows.findIndex(window => window.id === wid)
+        openWindows[index].zIndex = this.state.currentWID;
+        this.setState({
+            openWindows,
+            currentWID: this.state.currentWID + 1,
+        })
     }
 
     resizeWindow = (wid, size) => {
@@ -103,9 +110,11 @@ export class WindowManager extends Component {
                             scrollBars
                             resizeHandler={(wid, size) => windowAPI.resizeWindow(wid, size)}
                             moveHandler={(wid, position) => windowAPI.moveWindow(wid, position)}
-                            closeHandler={() => windowAPI.closeWindow(window.id)}
+                            focusHandler={(wid) => windowAPI.focusWindow(wid)}
+                            closeHandler={(wid) => windowAPI.closeWindow(wid)}
                             size={window.size}
                             position={window.position}
+                            zIndex={window.zIndex}
                             {...props}
                             >
                                 { window.content && window.content }
