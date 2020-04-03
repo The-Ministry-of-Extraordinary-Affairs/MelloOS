@@ -21,8 +21,8 @@ export class WindowProvider extends Component {
         let bodyWidth = document.getElementsByTagName("body")[0].clientWidth
         let bodyHeight = document.getElementsByTagName("body")[0].clientHeight
 
-        let width = bodyWidth < 640 ? bodyWidth : 640
-        let height = bodyHeight < 480 ? bodyHeight : 480
+        let width = bodyWidth < 640 ? bodyWidth - 60 : 640
+        let height = bodyHeight < 480 ? bodyHeight - 60 : 480
 
         let topWin = this.state.openWindows.filter(window => window.id === this.state.currentWID - 1);
 

@@ -67,7 +67,7 @@ class Window extends Component {
                 width: 640,
                 height:  480,
             },
-            position: {
+            position: props.position || {
                 left: 100,
                 top: 100,
             },
