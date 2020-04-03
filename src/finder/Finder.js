@@ -47,7 +47,7 @@ class Finder extends Component {
                                 <Icon
                                     src="../data/img/se.svg"
                                     label="MelloOS"
-                                    actionHandler={ () => appAPI.openApp("../data/img/se.svg")}
+                                    actionHandler={ (e) => appAPI.openApp(e, "../data/img/se.svg")}
                                     />
                                 <Icon
                                     src="../data/img/trash.svg"

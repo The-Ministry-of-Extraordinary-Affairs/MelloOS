@@ -18,11 +18,28 @@ export class WindowProvider extends Component {
     openWindow = (title) => {
         console.log(`opening new window with title: ${title}`)
 
+        let bodyWidth = document.getElementsByTagName("body")[0].clientWidth
+        let bodyHeight = document.getElementsByTagName("body")[0].clientHeight
+
+        let width = bodyWidth < 640 ? bodyWidth : 640
+        let height = bodyHeight < 480 ? bodyHeight : 480
+
+        let topWin = this.state.openWindows.filter(window => window.id === this.state.currentWID - 1);
+
+        let left = topWin[0] ? topWin[0].position.left + 30 : 30
+        let top = topWin[0] ? topWin[0].position.top + 30 : 60
+
+        left = left >= (bodyWidth - 30) ? 30 : left
+        top = top >= (bodyHeight - 60) ? 30 : top
+
+        console.log(top)
+        console.log(Window.innerHeight)
+
         let window = { title }
         window.id = this.state.currentWID
         window.content = window.id
-        window.size = { width: 640, height: 480 }
-        window.position = { left: 100, top: 100 }
+        window.size = { width, height }
+        window.position = { left, top }
         window.maximised = false
         window.zIndex = window.id
         this.setState({
