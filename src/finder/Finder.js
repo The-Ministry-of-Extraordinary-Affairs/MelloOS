@@ -61,6 +61,8 @@ class Finder extends Component {
                                 osMenu={osMenu}
                                 statusMenu={[<Clock />]}
                                 actionHandler={appAPI.openApp}
+                                resizeHandler={appAPI.openApp}
+                                actionHandler={appAPI.openApp}
                             />
                             <WindowManager />
                         </main>
